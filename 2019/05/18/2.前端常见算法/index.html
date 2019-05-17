@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Qbenben</title>
+  <title>2.前端学习——冒泡排序和快速排序学习 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="最近在学习过程中学习了JavaScript快速排序和冒泡排序的基础算法。特来记录一下自己学习和分享学习。">
+<meta name="keywords" content="JavaScript,前端学习,快速排序,冒泡排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.前端学习——冒泡排序和快速排序学习">
+<meta property="og:url" content="http://yoursite.com/2019/05/18/2.前端常见算法/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="最近在学习过程中学习了JavaScript快速排序和冒泡排序的基础算法。特来记录一下自己学习和分享学习。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-17T21:46:40.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="2.前端学习——冒泡排序和快速排序学习">
+<meta name="twitter:description" content="最近在学习过程中学习了JavaScript快速排序和冒泡排序的基础算法。特来记录一下自己学习和分享学习。">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,16 +143,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-2.前端常见算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-2.前端常见算法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/18/2.前端常见算法/">2.前端学习——冒泡排序和快速排序学习</a>
+    <h1 class="article-title" itemprop="name">
+      2.前端学习——冒泡排序和快速排序学习
     </h1>
   
 
@@ -165,9 +164,52 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>最近在学习过程中学习了JavaScript快速排序和冒泡排序的基础算法。<br><br>特来记录一下自己学习和分享学习。</p>
-        
+<a id="more"></a>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>最近在学习前端相关语法的时候想要接触一下前端常见的算法，就悄咪咪研究了一下。</p>
+<ul>
+<li>在我的理解看来，冒泡排序的就于把数组的最大数字，不断往后排，这样下一次排序中就直接可以舍弃最大数，达到冒泡的感觉。</li>
+<li>关键就在于如何理解循环控制比较的次数，以及控制每一轮的的比较次数。剩下的就是比较数字，交换数字。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bubbleSort = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//控制比较的次数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    <span class="comment">//控制每一轮比较的次数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arr.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        <span class="keyword">var</span> temp = arr[j];</span><br><span class="line">        arr[j] = arr[j + <span class="number">1</span>];</span><br><span class="line">        arr[j + <span class="number">1</span>] = temp</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ul>
+<li>思想：每一次找到数组一个基准点索引，通过基准点索引排除该元素位置并且获取值，然后数组被基准点分为两部分，依次遍历比较与基准点的值，大的右数组，小的左数组，然后再使用递归执行上面操作。直到数组的大小&lt;=1。</li>
+<li>理解：其实我的理解就是遍历，然后弹的感觉，弹中间基准点的值使他分离，然后小的弹左边，大的弹右边，最后不断递归上诉操作，就可以得到排序后的数组。</li>
+<li>优缺点：快速常用，可是我可是声明了两个数组，浪费了内存空间。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> quickSort = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//长度小于1无法不用比较，同时也是后面递归的终止条件</span></span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//基准数索引</span></span><br><span class="line">  <span class="keyword">var</span> midIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>);</span><br><span class="line">  <span class="comment">//splice方法删除索引位置上的值，返回基准数值</span></span><br><span class="line">  <span class="keyword">var</span> midIndexVal = arr.splice(midIndex, <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> left = [];</span><br><span class="line">  <span class="keyword">var</span> right = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; midIndexVal) &#123;</span><br><span class="line">      left.push(arr[i]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//递归分治</span></span><br><span class="line">  <span class="keyword">return</span> quickSort(left).concat(midIndexVal, quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h3><p>男神阮一峰的博客分享：<a href="http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html</a><br></p>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -199,16 +241,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/18/2.前端常见算法/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/18/2.前端常见算法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/06/1.干货分享/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1.实用干货——关于MarkdownPad2上传图片</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -223,91 +324,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1.干货分享" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/06/1.干货分享/">1.实用干货——关于MarkdownPad2上传图片</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/06/1.干货分享/" class="archive-article-date">
-  	<time datetime="2019-05-05T19:05:05.035Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是我的第一篇博客，目前专业的学习还在继续，就先不分享自己的学习成果，分享一篇我最近使用MarkdownPad2这个软件，所遇到的问题。<br><br>作为一个小白第一次使用MarkdownPad2时候总是喜欢点工具栏上面的图片按钮，以为这样就可以在自己写的文章中上传图片可是选中后出现 如下图所示的结果：<br><img src="https://raw.githubusercontent.com/Zhengqbbb/zhengqbbb.github.io/master/img/markdown1.jpg" alt> <img src="https://raw.githubusercontent.com/Zhengqbbb/zhengqbbb.github.io/master/img/markdown2.jpg" alt><br><br>出现这样的裂图，经过网上的查询资料，以及自己的总结，现在就来解决这个问题</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">增加图片</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/06/1.干货分享/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序"><span class="toc-number">1.</span> <span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-number">2.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引用："><span class="toc-number">2.1.</span> <span class="toc-text">引用：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -330,8 +372,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
