@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>3.ES5中的严格模式 | Qbenben</title>
+  <title>3.前端学习——ES5中的严格模式 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
 <meta name="keywords" content="JavaScript,随手笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3.ES5中的严格模式">
+<meta property="og:title" content="3.前端学习——ES5中的严格模式">
 <meta property="og:url" content="http://yoursite.com/2019/05/25/3.ES5中的一些扩展/index.html">
 <meta property="og:site_name" content="Qbenben">
 <meta property="og:description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-24T17:42:03.454Z">
+<meta property="og:updated_time" content="2019-05-24T17:51:48.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3.ES5中的严格模式">
+<meta name="twitter:title" content="3.前端学习——ES5中的严格模式">
 <meta name="twitter:description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
@@ -150,7 +150,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      3.ES5中的严格模式
+      3.前端学习——ES5中的严格模式
     </h1>
   
 
@@ -326,6 +326,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/05/31/4-node.jsExpress框架学习1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          4-node.js-Express框架学习-认识与基本操作
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/05/18/2.前端常见算法/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">2.前端学习——冒泡排序和快速排序学习</div>
@@ -347,19 +356,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#严格模式理解"><span class="toc-number">1.</span> <span class="toc-text">严格模式理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目的："><span class="toc-number">1.1.</span> <span class="toc-text">目的：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用："><span class="toc-number">1.2.</span> <span class="toc-text">使用：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、创设eval作用域"><span class="toc-number">1.3.</span> <span class="toc-text">3、创设eval作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、禁止使用with语句"><span class="toc-number">1.4.</span> <span class="toc-text">4、禁止使用with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、构造函数必须通过new实例化对象"><span class="toc-number">1.5.</span> <span class="toc-text">5、构造函数必须通过new实例化对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、为了让代码更安全，禁止函数内部遍历调用栈"><span class="toc-number">1.6.</span> <span class="toc-text">6、为了让代码更安全，禁止函数内部遍历调用栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、严格模式下无法删除变量"><span class="toc-number">1.7.</span> <span class="toc-text">7、严格模式下无法删除变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、属性相关"><span class="toc-number">1.8.</span> <span class="toc-text">8、属性相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、函数必须声明在顶层"><span class="toc-number">1.9.</span> <span class="toc-text">9、函数必须声明在顶层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、新增关键字"><span class="toc-number">1.10.</span> <span class="toc-text">10、新增关键字</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
@@ -459,19 +455,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">增加图片</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,6 +476,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">冒泡排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
               </li>
             
             <div class="clearfix"></div>

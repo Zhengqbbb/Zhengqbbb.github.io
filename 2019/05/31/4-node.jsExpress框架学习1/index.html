@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 随手笔记 | Qbenben</title>
+  <title>4-node.js-Express框架学习-认识与基本操作 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://yoursite.com/tags/随手笔记/index.html">
+  <meta name="description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta name="keywords" content="nodejs,Express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4-node.js-Express框架学习-认识与基本操作">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/4-node.jsExpress框架学习1/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-30T18:19:50.752Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="4-node.js-Express框架学习-认识与基本操作">
+<meta name="twitter:description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,64 +143,195 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-4-node.jsExpress框架学习1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/25/3.ES5中的一些扩展/" class="archive-article-date">
-  	<time datetime="2019-05-24T17:22:43.983Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/25/3.ES5中的一些扩展/">3.前端学习——ES5中的严格模式</a>
+    <h1 class="article-title" itemprop="name">
+      4-node.js-Express框架学习-认识与基本操作
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/31/4-node.jsExpress框架学习1/" class="archive-article-date">
+  	<time datetime="2019-05-30T16:44:05.193Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Qben最近学习node.js记录Express框架的学习笔记——1</p>
+<p>对Express认识与基本操作</p><br><a id="more"></a><br><br>## 下载Express<br>1.  在nvm和node.js环境作为前提。<br>2.  在所在开发的文件中运行命令：<code>npm install express –save</code><br>3.  新建文件：<code>server.js</code>该文件是直接在操作系统运行，独立浏览器之外的js文件<br><br>## 快速入门路由<br>1.  <code>const express = require(express)</code>引用Express包返回一个函数<br>2.  <code>const app =express()</code>实例化<br>3. 使用get方式请求：req(请求数据)，res(响应数据)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">  res.send([</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">1</span>,<span class="attr">user</span>: <span class="string">'qbenben1'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">2</span>,<span class="attr">user</span>: <span class="string">'qbenben2'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">3</span>,<span class="attr">user</span>: <span class="string">'qbenben3'</span>&#125;,</span><br><span class="line">  ]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br><br>4.  设置监听:在3000端口<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'App'</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure><br><br>5. 启动服务器进行监听：我们有时候的更改需要暂停服务器再启动而如果下载<code>nodemon</code>后再启动nodemon服务器，我们更改会使得服务器暂停再启动，达到便利，全局下载命令：<code>npm i nodemon -g –verbose</code><p>启动服务器:<code>nodemon server.js</code></p>
+
+
+
+<h2 id="引用：学习路径-B站up主：-全栈之巅"><a href="#引用：学习路径-B站up主：-全栈之巅" class="headerlink" title="引用：学习路径-B站up主： 全栈之巅"></a>引用：学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></h2><hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随手笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/31/4-node.jsExpress框架学习1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/25/3.ES5中的一些扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3.前端学习——ES5中的严格模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引用：学习路径-B站up主：-全栈之巅"><span class="toc-number">1.</span> <span class="toc-text">引用：学习路径-B站up主： 全栈之巅</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -222,9 +354,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
