@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 随手笔记 | Qbenben</title>
+  <title>5-node.js-Express框架学习-静态文件托管以及CORS跨域请求 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://yoursite.com/tags/随手笔记/index.html">
+  <meta name="description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——2 静态文件托管以及CORS跨域请求">
+<meta name="keywords" content="nodejs,Express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5-node.js-Express框架学习-静态文件托管以及CORS跨域请求">
+<meta property="og:url" content="http://yoursite.com/2019/06/01/5-node.jsExpress框架学习2/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——2 静态文件托管以及CORS跨域请求">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-01T01:52:37.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="5-node.js-Express框架学习-静态文件托管以及CORS跨域请求">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——2 静态文件托管以及CORS跨域请求">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,64 +143,216 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-5-node.jsExpress框架学习2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/25/3.ES5中的一些扩展/" class="archive-article-date">
-  	<time datetime="2019-05-24T17:22:43.983Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/25/3.ES5中的一些扩展/">3.前端学习——ES5中的严格模式</a>
+    <h1 class="article-title" itemprop="name">
+      5-node.js-Express框架学习-静态文件托管以及CORS跨域请求
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/06/01/5-node.jsExpress框架学习2/" class="archive-article-date">
+  	<time datetime="2019-05-31T23:43:57.350Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>Qben最近学习node.js记录Express框架的学习笔记——2</p>
+<p>静态文件托管以及CORS跨域请求</p>
+
+<a id="more"></a>
+<h2 id="静态文件托管"><a href="#静态文件托管" class="headerlink" title="静态文件托管"></a>静态文件托管</h2><ul>
+<li>建立文件夹<code>public</code></li>
+<li>建立文件<code>index.html</code>此时我们无法直接访问server文件需要一个路由，此时就需要Express里面的静态文件托管。</li>
+<li>在<code>server.js</code>中使用一个中间件<code>app.use(express.static(‘public’))</code>他是Express中专门用来处理静态文件的。意思是public中的静态文件可以被访问。</li>
+<li>注意：我们可以在<code>app.use(‘/static’,express.static(‘public’))</code>。代表此时我们直接<code><a href="http://localhost:4000/index.html" target="_blank" rel="noopener">http://localhost:4000/index.html</a></code>访问是访问不了的。必须要<code><a href="http://localhost:4000/static/index.html" target="_blank" rel="noopener">http://localhost:4000/static/index.html</a></code>才能被访问。使得访问逻辑可控。</li>
+</ul>
+<h2 id="CORS跨域请求"><a href="#CORS跨域请求" class="headerlink" title="CORS跨域请求"></a>CORS跨域请求</h2><ul>
+<li><p>什么是跨域：主机名加端口号算是一个域，我们使用当前的域打开了文件，再用另一个域去请求当前域打开文件的数据。</p>
+</li>
+<li><p>我们在<code>index.html</code>中加入异步请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    fetch(<span class="string">'http://localhost:4000/index.html'</span>).then(<span class="function"><span class="params">res</span>=&gt;</span>res.json()).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<body>可以用浏览器自带的<code>fetch(‘<a href="http://localhost:4000/index.html&#39;" target="_blank" rel="noopener">http://localhost:4000/index.html&#39;</a>)</code>请求异步数据的接口，使用then返回一个response，response中的json数据，将得到json数据再使用then方法输出。</body>
+
+<ul>
+<li><p>此时我们分别用nodemon打开页面再用Vscode插件同时打开，就会报一个跨域请求的错误。如：4000端口兵并不允许其他域来访问数据，是因为响应头中并没有允许的来源是哪里。</p>
+</li>
+<li><p>在node.js中解决是很简单的，在<code>server.js</code>中安装跨域包<code>npm i cors</code>再use这个包<code>app.use(require(‘cors’)());</code>cors返回的是一个中间件，所以我们直接use他，此时再跨域请求就不会报错啦~完结</p>
+</li>
+</ul>
+<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a><p style="font-size:16px;">学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></p></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随手笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/01/5-node.jsExpress框架学习2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/31/4-node.jsExpress框架学习1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">4-node.js-Express框架学习-认识与基本操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态文件托管"><span class="toc-number">1.</span> <span class="toc-text">静态文件托管</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CORS跨域请求"><span class="toc-number">2.</span> <span class="toc-text">CORS跨域请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">3.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">4.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -222,9 +375,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

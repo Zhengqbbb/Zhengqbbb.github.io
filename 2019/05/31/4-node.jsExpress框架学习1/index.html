@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>4-node.js-Express框架学习-认识与基本操作 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+  <meta name="description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
 <meta name="keywords" content="nodejs,Express">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4-node.js-Express框架学习-认识与基本操作">
 <meta property="og:url" content="http://yoursite.com/2019/05/31/4-node.jsExpress框架学习1/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta property="og:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-30T18:36:17.342Z">
+<meta property="og:updated_time" content="2019-06-01T01:52:30.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4-node.js-Express框架学习-认识与基本操作">
-<meta name="twitter:description" content="Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -163,29 +163,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Qben最近学习node.js记录Express框架的学习笔记——1</p>
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>Qben最近学习node.js记录Express框架的学习笔记——1</p>
 <p>对Express认识与基本操作</p>
 
+
 <a id="more"></a>
-<h2 id="下载Express"><a href="#下载Express" class="headerlink" title="下载Express"></a>下载Express</h2><ol>
+<h2 id="简单搭建Express"><a href="#简单搭建Express" class="headerlink" title="简单搭建Express"></a>简单搭建Express</h2><ul>
 <li>在nvm和node.js环境作为前提。</li>
 <li>在所在开发的文件中运行命令：<code>npm install express –save</code></li>
 <li>新建文件：<code>server.js</code>该文件是直接在操作系统运行，独立浏览器之外的js文件</li>
-</ol>
-<h2 id="快速入门路由"><a href="#快速入门路由" class="headerlink" title="快速入门路由"></a>快速入门路由</h2><ol>
+</ul>
+<h2 id="快速入门路由"><a href="#快速入门路由" class="headerlink" title="快速入门路由"></a>快速入门路由</h2><ul>
 <li><code>const express = require(express)</code>引用Express包返回一个函数</li>
 <li><code>const app =express()</code>实例化</li>
-<li>使用get方式请求：req(请求数据)，res(响应数据)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">  res.send([</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">1</span>,<span class="attr">user</span>: <span class="string">'qbenben1'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">2</span>,<span class="attr">user</span>: <span class="string">'qbenben2'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">id</span>: <span class="number">3</span>,<span class="attr">user</span>: <span class="string">'qbenben3'</span>&#125;,</span><br><span class="line">  ]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<li>使用get方式请求：req(请求数据)，res(响应数据)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">   res.send([</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">1</span>,<span class="attr">user</span>: <span class="string">'qbenben1'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">2</span>,<span class="attr">user</span>: <span class="string">'qbenben2'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">3</span>,<span class="attr">user</span>: <span class="string">'qbenben3'</span>&#125;,</span><br><span class="line">   ]);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol start="4">
-<li><p>设置监听:在3000端口</p>
+</ul>
+<ul>
+<li>设置监听:在3000端口</li>
+</ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'App'</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动服务器进行监听：我们有时候的更改需要暂停服务器再启动而如果下载<code>nodemon</code>后再启动nodemon服务器，我们更改会使得服务器暂停再启动，达到便利，全局下载命令：<code>npm i nodemon -g –verbose</code></p><p>启动服务器:<code>nodemon server.js</code></p><p></p>
-</li>
-</ol>
-<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a>学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+<ul>
+<li>启动服务器进行监听：我们有时候的更改需要暂停服务器再启动而如果下载<code>nodemon</code>后再启动nodemon服务器，我们更改会使得服务器暂停再启动，达到便利，全局下载命令：<code>npm i nodemon -g –verbose</code><p>启动服务器:<code>nodemon server.js</code></p></li>
+</ul>
+<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a><p>学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></p></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
 
       
 
@@ -299,6 +302,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/06/01/5-node.jsExpress框架学习2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          5-node.js-Express框架学习-静态文件托管以及CORS跨域请求
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/05/25/3.ES5中的一些扩展/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">3.前端学习——ES5中的严格模式</div>
@@ -328,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Express"><span class="toc-number">1.</span> <span class="toc-text">下载Express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门路由"><span class="toc-number">2.</span> <span class="toc-text">快速入门路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">3.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">4.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单搭建Express"><span class="toc-number">1.</span> <span class="toc-text">简单搭建Express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门路由"><span class="toc-number">2.</span> <span class="toc-text">快速入门路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">3.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">4.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -444,10 +456,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端学习</a>
               </li>
              
@@ -457,6 +465,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">冒泡排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
