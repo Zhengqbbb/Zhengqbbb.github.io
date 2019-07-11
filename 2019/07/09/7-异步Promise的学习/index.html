@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>4-node.js-Express框架学习-认识与基本操作 | Qbenben</title>
+  <title>7-异步Promise的学习 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
-<meta name="keywords" content="nodejs,Express">
+  <meta name="description" content="body,li,code{font-size:16px;}  Qben整个6月都用来做自己的个人小全栈课程设计了，现在进入复习阶段，特来记录一下Promise的学习 本篇介绍Promise的基础学习，以及个人见解">
+<meta name="keywords" content="nodejs,Promise">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4-node.js-Express框架学习-认识与基本操作">
-<meta property="og:url" content="http://yoursite.com/2019/05/31/4-node.jsExpress框架学习1/index.html">
+<meta property="og:title" content="7-异步Promise的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/09/7-异步Promise的学习/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta property="og:description" content="body,li,code{font-size:16px;}  Qben整个6月都用来做自己的个人小全栈课程设计了，现在进入复习阶段，特来记录一下Promise的学习 本篇介绍Promise的基础学习，以及个人见解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-01T01:58:42.315Z">
+<meta property="og:updated_time" content="2019-07-11T03:49:59.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4-node.js-Express框架学习-认识与基本操作">
-<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta name="twitter:title" content="7-异步Promise的学习">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben整个6月都用来做自己的个人小全栈课程设计了，现在进入复习阶段，特来记录一下Promise的学习 本篇介绍Promise的基础学习，以及个人见解">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -143,20 +143,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-4-node.jsExpress框架学习1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-7-异步Promise的学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      4-node.js-Express框架学习-认识与基本操作
+      7-异步Promise的学习
     </h1>
   
 
         
-        <a href="/2019/05/31/4-node.jsExpress框架学习1/" class="archive-article-date">
-  	<time datetime="2019-05-30T16:44:05.193Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+        <a href="/2019/07/09/7-异步Promise的学习/" class="archive-article-date">
+  	<time datetime="2019-07-08T17:54:48.691Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
 </a>
         
       </header>
@@ -165,30 +165,58 @@
       
         <style>body,li,code{font-size:16px;}</style>
 
-<p>Qben最近学习node.js记录Express框架的学习笔记——1</p>
-<p>对Express认识与基本操作</p>
-
+<p>Qben整个6月都用来做自己的<a href="https://github.com/Zhengqbbb/Jluzh-library" target="_blank" rel="noopener">个人小全栈课程设计</a>了，现在进入复习阶段，特来记录一下Promise的学习</p>
+<p>本篇介绍Promise的基础学习，以及个人见解</p>
 
 <a id="more"></a>
-<h2 id="简单搭建Express"><a href="#简单搭建Express" class="headerlink" title="简单搭建Express"></a>简单搭建Express</h2><ul>
-<li>在nvm和node.js环境作为前提。</li>
-<li>在所在开发的文件中运行命令：<code>npm install express –save</code></li>
-<li>新建文件：<code>server.js</code>该文件是直接在操作系统运行，独立浏览器之外的js文件</li>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="1-Promise的出现"><a href="#1-Promise的出现" class="headerlink" title="1.Promise的出现"></a>1.Promise的出现</h2><ul>
+<li>下面的代码里benben发起了两个ajax请求：</li>
 </ul>
-<h2 id="快速入门路由"><a href="#快速入门路由" class="headerlink" title="快速入门路由"></a>快速入门路由</h2><ul>
-<li><code>const express = require(express)</code>引用Express包返回一个函数</li>
-<li><code>const app =express()</code>实例化</li>
-<li>使用get方式请求：req(请求数据)，res(响应数据)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">   res.send([</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">1</span>,<span class="attr">user</span>: <span class="string">'qbenben1'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">2</span>,<span class="attr">user</span>: <span class="string">'qbenben2'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">3</span>,<span class="attr">user</span>: <span class="string">'qbenben3'</span>&#125;,</span><br><span class="line">   ]);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">let</span> user;</span><br><span class="line">  <span class="comment">//下面我发起了两个ajax请求</span></span><br><span class="line">  <span class="comment">//fetch all users</span></span><br><span class="line">  $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">    user = data[<span class="number">0</span>].login;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">//fetch the first user's repos</span></span><br><span class="line">  $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`,data =&gt; &#123;</span></span><br><span class="line"><span class="string">    console.log('fetched user repos');</span></span><br><span class="line"><span class="string">    console.log(data)</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>从上面的代码内可以明显看出我对github所有用户发了请求，再对第一位用户的信息发了请求<br><br>我一共运行了两次返回了不一样的结果：</li>
+</ul>
+<ol>
+<li>fetched user repos<br><br>   [{…}]<br><br>fetch all users<br></li>
+<li>fetch all users<br><br>fetched user repos<br><br> [{…}]</li>
+</ol>
+<ul>
+<li>我们也可以从上面返回的结果发现user是 undefined。</li>
+<li><p>我们想让他先获取到所有的用户，再得到第一个的用户名，但是结果却不是我们想的那样，两个ajax请求同时发生，我们无法确定那一个会先执行成功并返回，这个结果是不定的。</p>
+</li>
+<li><p>为了保证先发生第一个ajax请求再执行第二个ajax请求，不难想象我们会把第二个ajax请求写在第一个ajax请求之中：</p>
 </li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> user;</span><br><span class="line">    $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">      user = data[<span class="number">0</span>].login;</span><br><span class="line">      $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`, data =&gt; &#123;</span></span><br><span class="line"><span class="string">      console.log('fetched user repos');</span></span><br><span class="line"><span class="string">      console.log(data)</span></span><br><span class="line"><span class="string">      &#125;)</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>设置监听:在3000端口</li>
+<li>返回结果： <br><br>fetch all users<br><br>fetched user repos<br><br> (30) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]<br></li>
+<li>此时确实可以达到我们的预期，而且user也成功返回了第一个用户</li>
+<li>但是如果有第三个第四个请求，我们也只能把他们写进去，不难发现如果随着我们的依赖越来越多，代码的嵌套也越来越深，也因此我们可能会坠入传说中的回调地狱。</li>
+<li>为了解决这个回调顺序的不确定性和回调地狱，ES6中也帮我们提出了Promise这种机制来解决这个问题。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'App'</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="2-Promise简介"><a href="#2-Promise简介" class="headerlink" title="2.Promise简介"></a>2.Promise简介</h2><ul>
+<li>奔奔对于Promise的理解相当于是一承诺，不管发生了什么事件，都会给你一个结果。</li>
+<li>打个比方我们现在点了一个饿了么外卖，下单后会给你一个订单号，这就是饿了么给了我们的一个承诺，如果商家接单，这承诺就有效成功，否则就是商家拒绝，这个承诺无效，你可以根据这一反馈做出处理。</li>
+<li>接下来我们用axios来实际操作一下Promise：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">  usersPromise.then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>启动服务器进行监听：我们有时候的更改需要暂停服务器再启动而如果下载<code>nodemon</code>后再启动nodemon服务器，我们更改会使得服务器暂停再启动，达到便利，全局下载命令：<code>npm i nodemon -g –verbose</code><p>启动服务器:<code>nodemon server.js</code></p></li>
+<li><p>上面的then方法类似于事件监听，监听当他成功发起请求会执行什么操作，我们想让返回请求后打印出来：<br><br>{data: Array(30), status: 200, statusText: “OK”, headers: {…}, config: {…}, …}</p>
+</li>
+<li><p>接下来我们想返回第一个用户的数据请求：<br></p>
+</li>
 </ul>
-<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a><p style="font-size:19px;">学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></p></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">    </span><br><span class="line">     usersPromise</span><br><span class="line">    .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">      username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">      <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">    &#125;)<span class="comment">//因为上面返回的也是一个promise实例所以我们可以链式编程打印出来</span></span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>返回结果：(30) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}</p>
+</li>
+<li><p>这样我们就可以知道当他第一个请求成功做什么，第二个请求成功后做什么。最后我们再用catch方法监听错误的发生：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">    </span><br><span class="line">     usersPromise</span><br><span class="line">    .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">      username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">      <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><p>这次我们对Promise有了简单的了解，可以把他理解为对异步编程的一个反馈一种承诺，通常在调用json数据了ajax请求当中</p>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
 
       
 
@@ -232,7 +260,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
         		</li>
       		
 		</ul>
@@ -288,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/31/4-node.jsExpress框架学习1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/09/7-异步Promise的学习/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +330,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/01/5-node.jsExpress框架学习2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          5-node.js-Express框架学习-静态文件托管以及CORS跨域请求
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/25/3.ES5中的一些扩展/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3.前端学习——ES5中的严格模式</div>
+    <a href="/2019/06/01/6-node.jsExpress框架学习3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">6-node.js-Express框架学习-连接MongoDB数据库以及操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -340,7 +359,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单搭建Express"><span class="toc-number">1.</span> <span class="toc-text">简单搭建Express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门路由"><span class="toc-number">2.</span> <span class="toc-text">快速入门路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">3.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">4.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Promise"><span class="toc-number">1.</span> <span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Promise的出现"><span class="toc-number">1.1.</span> <span class="toc-text">1.Promise的出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Promise简介"><span class="toc-number">1.2.</span> <span class="toc-text">2.Promise简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.3.</span> <span class="toc-text">总结本篇：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
