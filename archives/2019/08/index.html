@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>8-异步Promise的学习—处理多个Promise | Qbenben</title>
+  <title>Archives: 2019/8 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="body,li,code{font-size:16px;}Qbenben 这一个星期的ES6的复习已经完成拉 本篇介绍如何处理多个Promise，以及个人见解">
-<meta name="keywords" content="nodejs,Promise">
-<meta property="og:type" content="article">
-<meta property="og:title" content="8-异步Promise的学习—处理多个Promise">
-<meta property="og:url" content="http://qbenben.com/2019/07/21/8-异步Promise的学习/index.html">
+  <meta name="description" content="���ѧϰ">
+<meta name="keywords" content="��ˣ����ѧϰ">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Qbenben">
+<meta property="og:url" content="http://qbenben.com/archives/2019/08/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="body,li,code{font-size:16px;}Qbenben 这一个星期的ES6的复习已经完成拉 本篇介绍如何处理多个Promise，以及个人见解">
+<meta property="og:description" content="���ѧϰ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-21T09:58:37.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="8-异步Promise的学习—处理多个Promise">
-<meta name="twitter:description" content="body,li,code{font-size:16px;}Qbenben 这一个星期的ES6的复习已经完成拉 本篇介绍如何处理多个Promise，以及个人见解">
+<meta name="twitter:title" content="Qbenben">
+<meta name="twitter:description" content="���ѧϰ">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -143,219 +142,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-8-异步Promise的学习" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      8-异步Promise的学习—处理多个Promise
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/08/01/10-必说清这js中的原型和原型链/" class="archive-article-date">
+  	<time datetime="2019-08-01T09:11:46.831Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/01/10-必说清这js中的原型和原型链/">10-誓必说清这js中的原型和原型链</a>
     </h1>
   
 
-        
-        <a href="/2019/07/21/8-异步Promise的学习/" class="archive-article-date">
-  	<time datetime="2019-07-21T09:05:10.018Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><style>body,li,code{font-size:16px;}</style><br>Qbenben 这一个星期的<a href="https://github.com/Zhengqbbb/dailyDemo/tree/master/ES6" target="_blank" rel="noopener">ES6</a>的复习已经完成拉</p>
-<p>本篇介绍如何处理多个Promise，以及个人见解</p>
-
-<a id="more"></a>
-<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="1-处理多个Promise"><a href="#1-处理多个Promise" class="headerlink" title="1.处理多个Promise"></a>1.处理多个Promise</h2><ul>
-<li>假如现在我们有两个同时发起的Promise请求需要同时执行，并且他们两个没有互相的依赖就不需要有前后顺序（并行执行），代码如下：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userPromise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">ressolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve([<span class="string">'mojombo'</span>, <span class="string">'vanpelt'</span>, <span class="string">'wycats'</span>]);</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> moviePromise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(&#123; <span class="attr">name</span>: <span class="string">'摔跤吧爸爸'</span>, <span class="attr">rating</span>: <span class="number">2</span>, <span class="attr">year</span>: <span class="number">2016</span> &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此时我们可以用 <code>Promise.all</code>  相当于两个Promise同时开始执行，同时返回值，并不是先执行第一个再执行第二个，然后把resolve的值保存在数组中输出。代码如下： （需要注意的是方法的参数是一个数组，元素是Promise的实例）</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([userPromise, moviePromise])</span><br><span class="line">      .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response);</span><br><span class="line">        <span class="comment">//我们可以发现返回输出的是一个数组，我们使用ES6数组解构看看数组元素输出</span></span><br><span class="line">        <span class="keyword">const</span> [users, movie] = response;</span><br><span class="line">        <span class="built_in">console</span>.log(users);</span><br><span class="line">        <span class="built_in">console</span>.log(movie);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(err);</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>需要注意的是这个 <code>Promise.all</code> 类似于ES6中数组的every方法，如果数组当中有一个是reject则不会执行then</p>
-</li>
-<li><p><code>Promise.race()</code> 类似于 <code>Promise.all()</code>也是有多个Promise实例并行执行，然后把resolve的值保存在数组中输出。唯一不同的时！：如果当中<code>第一个</code>是reject则不会执行then</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.race([userPromise, moviePromise])</span><br><span class="line">      .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><p>这次我们对Promise处理多个并行执行</p>
-<hr>
-<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">原型和原型链以及继承</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/07/21/8-异步Promise的学习/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/07/22/9-异步Async-await的学习5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          9-异步Async/await的学习
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/07/09/7-异步Promise的学习/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">7-异步Promise的学习</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Promise"><span class="toc-number">1.</span> <span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-处理多个Promise"><span class="toc-number">1.1.</span> <span class="toc-text">1.处理多个Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.2.</span> <span class="toc-text">总结本篇：</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -378,8 +222,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
