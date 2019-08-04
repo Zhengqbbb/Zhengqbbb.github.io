@@ -6,20 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>3.前端学习——ES5中的严格模式 | Qbenben</title>
+  <title>11-JS 防抖与节流学习 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
-<meta name="keywords" content="JavaScript,随手笔记">
+  <meta name="description" content="body,li,code{font-size:16px;}  本篇介绍的是JS防抖与节流以及扩展知识点的学习">
+<meta name="keywords" content="JavaScript,防抖与节流">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3.前端学习——ES5中的严格模式">
-<meta property="og:url" content="http://qbenben.com/2019/05/25/3.ES5中的一些扩展/index.html">
+<meta property="og:title" content="11-JS 防抖与节流学习">
+<meta property="og:url" content="http://qbenben.com/2019/08/04/11-JS 防抖与节流学习/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
+<meta property="og:description" content="body,li,code{font-size:16px;}  本篇介绍的是JS防抖与节流以及扩展知识点的学习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-01T01:10:00.698Z">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E9%98%B2%E6%8A%96.gif">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E8%8A%82%E6%B5%81.gif">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E9%87%8D%E7%BB%98%E5%9B%9E%E6%B5%81.jpg">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/http1.jpg">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.jpg">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP4%E6%AC%A1%E6%8C%A5%E6%89%8B3.jpg">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2.jpg">
+<meta property="og:updated_time" content="2019-08-04T11:01:55.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3.前端学习——ES5中的严格模式">
-<meta name="twitter:description" content="ES的几个重要版本:  ES5 : 09年发布。  ES6(ES2015) : 2015年发布，也称为ECMA2015。  ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。   严格模式的概念:  除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。  顾名思义，这种模式使得Javascript在更严格的语法条件下运行">
+<meta name="twitter:title" content="11-JS 防抖与节流学习">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  本篇介绍的是JS防抖与节流以及扩展知识点的学习">
+<meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E9%98%B2%E6%8A%96.gif">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -143,73 +151,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-3.ES5中的一些扩展" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-11-JS 防抖与节流学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      3.前端学习——ES5中的严格模式
+      11-JS 防抖与节流学习
     </h1>
   
 
         
-        <a href="/2019/05/25/3.ES5中的一些扩展/" class="archive-article-date">
-  	<time datetime="2019-05-24T17:22:43.983Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
+        <a href="/2019/08/04/11-JS 防抖与节流学习/" class="archive-article-date">
+  	<time datetime="2019-08-04T07:42:29.974Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ES的几个重要版本:</p>
-<ul>
-<li><p>ES5 : 09年发布。</p>
-</li>
-<li><p>ES6(ES2015) : 2015年发布，也称为ECMA2015。</p>
-</li>
-<li><p>ES7(ES2016) : 2016年发布，也称为ECMA2016 (变化不大)。</p>
-</li>
-</ul>
-<p>严格模式的概念:<br></p>
-<ul>
-<li>除了正常运行模式(混杂模式)，ES5添加了第二种运行模式：”严格模式”（strict mode）。</li>
-</ul>
-<p>顾名思义，这种模式使得Javascript在更严格的语法条件下运行。</p>
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>本篇介绍的是JS防抖与节流以及扩展知识点的学习</p>
+
 <a id="more"></a>
-<h2 id="严格模式理解"><a href="#严格模式理解" class="headerlink" title="严格模式理解"></a>严格模式理解</h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><ul>
-<li>消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为</li>
-<li>消除代码运行的一些不安全之处，为代码的安全运行保驾护航</li>
-<li>为未来新版本的Javascript做好铺垫</li>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><ul>
+<li>一开始奔奔听到防抖和节流的时候，第一反应莫非是CSS的知识（捂脸），其实不是哈哈哈（年轻）。</li>
+<li>在我这次开发我的<a href="https://github.com/Zhengqbbb/Jluzh-library" target="_blank" rel="noopener">课程设计</a>有遇到搜索图书功能，我在想用户如果在搜索的时候，不停地敲字，如果每敲一个字我们都要调用接口返回数据，接口调用太频繁，会使得页面卡住。</li>
+<li>又或者说在用户阅读我们项目文章时候，需要监听用户滚动到哪一个标题，但是每滚动一次就要监听，那么也会因为我们太过频繁的调用从而占用内存，如果加上其他的业务的代码，直接卡住，那么用户体验就肯定很差。</li>
+<li>介个时候就要用到我们的<code>防抖和节流了</code></li>
+<li>那么，说道防抖和节流，奔奔就顺带探险了一下<code>重绘和回流</code></li>
+<li>当然说到重绘和回流，顺带也探险一下我们就顺带把 浏览器输入 URL 后发生的事情 也关注一下，从而引出 <code>DNS、TCP</code> 等知识点做下记录.</li>
 </ul>
-<h3 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h3><ul>
-<li><p>针对整个脚本文件：将<figure class="highlight plain"><figcaption><span>strict```放在脚本文件的第一行，则整个脚本文件将以严格模式运行。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">* 针对单个函数：将```use strict```放在函数体的第一行，则整个函数以严格模式运行。</span><br><span class="line"></span><br><span class="line">PS：如果浏览器不支持，则这句话只解析为一条简单的语句, 没有任何副作用。</span><br><span class="line"></span><br><span class="line">脚本文件的变通写法：因为第一种调用方法不利于文件合并，所以更好的做法是，借用第二种方法，将整个脚本文件放在一个立即执行的匿名函数之中。</span><br><span class="line"></span><br><span class="line">### 语法和行为改变：</span><br><span class="line">* 必须用var声明变量</span><br><span class="line">* 禁止自定义的函数中的this指向window</span><br><span class="line">* 创建eval作用域</span><br><span class="line">* 对象不能有重名的属性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 严格模式和普通模式的区别</span><br><span class="line">### 1、全局变量显式声明</span><br><span class="line">* 在正常模式中，如果一个变量没有声明就赋值，默认是全局变量。严格模式禁止这种用法，全局变量必须显式声明。</span><br><span class="line"></span><br><span class="line">### 2、禁止this关键字指向全局对象：</span><br><span class="line">```JavaScript </span><br><span class="line">        var foo = function () &#123;</span><br><span class="line">            console.log(this);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        foo();</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>上方代码中，普通模式打印的是window。严格模式下打印的是undefined。</p>
-</li>
+<h2 id="2-防抖"><a href="#2-防抖" class="headerlink" title="2.防抖"></a>2.防抖</h2><ul>
+<li>下面是一段防抖的demo：</li>
 </ul>
-<h3 id="3、创设eval作用域"><a href="#3、创设eval作用域" class="headerlink" title="3、创设eval作用域"></a>3、创设eval作用域</h3><h3 id="4、禁止使用with语句"><a href="#4、禁止使用with语句" class="headerlink" title="4、禁止使用with语句"></a>4、禁止使用with语句</h3><ul>
-<li>因为with语句无法在编译时就确定，属性到底归属哪个对象。<h3 id="5、构造函数必须通过new实例化对象"><a href="#5、构造函数必须通过new实例化对象" class="headerlink" title="5、构造函数必须通过new实例化对象"></a>5、构造函数必须通过new实例化对象</h3></li>
-<li>构造函数必须通过new实例化对象，否则报错。因为this为undefined，此时无法设置属性。</li>
-</ul>
-<p>比如说：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Cat = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Cat(<span class="string">'haha'</span>);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>防抖<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"debounce"</span>&gt;</span>点我防抖！<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 1、获取这个按钮，并绑定事件</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> myDebounce = <span class="built_in">document</span>.getElementById(<span class="string">"debounce"</span>);</span></span><br><span class="line"><span class="javascript">      myDebounce.addEventListener(<span class="string">"click"</span>, debounce(sayDebounce));</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 2、防抖功能函数，接受传参</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 4、创建一个标记用来存放定时器的返回值</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> timeout = <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 5、每次当用户点击/输入的时候，把前一个定时器清除</span></span></span><br><span class="line"><span class="undefined">        clearTimeout(timeout);</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 6、然后创建一个新的 setTimeout，</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 这样就能保证点击按钮后的 interval 间隔内</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 如果用户还点击了的话，就不会执行 fn 函数</span></span></span><br><span class="line"><span class="javascript">        timeout = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          fn.call(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span></span><br><span class="line"><span class="undefined">        &#125;, 1000);</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 3、需要进行防抖的事件处理</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">sayDebounce</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// ... 有些需要防抖的工作，在这里执行</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"防抖成功！"</span>);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>上方代码中，如果在严格模式下，则会报错。<h3 id="6、为了让代码更安全，禁止函数内部遍历调用栈"><a href="#6、为了让代码更安全，禁止函数内部遍历调用栈" class="headerlink" title="6、为了让代码更安全，禁止函数内部遍历调用栈"></a>6、为了让代码更安全，禁止函数内部遍历调用栈</h3><h3 id="7、严格模式下无法删除变量"><a href="#7、严格模式下无法删除变量" class="headerlink" title="7、严格模式下无法删除变量"></a>7、严格模式下无法删除变量</h3><h3 id="8、属性相关"><a href="#8、属性相关" class="headerlink" title="8、属性相关"></a>8、属性相关</h3></li>
-<li><p>普通模式下，对一个对象的只读属性进行赋值，不会报错，只会默默地失败。严格模式下，将报错。</p>
+<li><p>可以看一下运行gif效果图：<br><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E9%98%B2%E6%8A%96.gif" alt></p>
 </li>
-<li><p>严格模式下，对禁止扩展的对象添加新属性，会报错。</p>
+<li><p>看完这个gif估计就知道防抖是什么了，并不是CSS防止抖动！(捂脸)！概念:<code>防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。</code></p>
 </li>
-<li><p>普通模式下，如果对象有多个重名属性，最后赋值的那个属性会覆盖前面的值。严格模式下，这属于语法错误。</p>
+<li>场景：有个输入框，输入之后会调用接口，获取联想词。但是，因为频繁调用接口不太好，所以我们在代码中使用防抖功能，只有在用户输入完毕的一段时间后，才会调用接口，出现联想词。</li>
+<li>简单点讲：<b>这件事儿需要等待，如果你反复催促，我就重新计时！</b></li>
+</ul>
+<h2 id="3-节流"><a href="#3-节流" class="headerlink" title="3.节流"></a>3.节流</h2><ul>
+<li>上面说完防抖，下面我们来讲讲节流。先上代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>节流<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"throttle"</span>&gt;</span>点我节流！<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 1、获取按钮，绑定点击事件</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> myThrottle = <span class="built_in">document</span>.getElementById(<span class="string">"throttle"</span>);</span></span><br><span class="line"><span class="javascript">      myThrottle.addEventListener(<span class="string">"click"</span>, throttle(sayThrottle));</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 2、节流函数体</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 4、通过闭包保存一个标记</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> canRun = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 5、在函数开头判断标志是否为 true，不为 true 则中断函数</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(!canRun) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 6、将 canRun 设置为 false，防止执行之前再被执行</span></span></span><br><span class="line"><span class="javascript">        canRun = <span class="literal">false</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 7、定时器</span></span></span><br><span class="line"><span class="javascript">        setTimeout( <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          fn.call(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span></span><br><span class="line"><span class="javascript">          <span class="comment">// 8、执行完事件（比如调用完接口）之后，重新将这个标志设置为 true</span></span></span><br><span class="line"><span class="javascript">          canRun = <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">        &#125;, 1000);</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 3、需要节流的事件</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">sayThrottle</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">"节流成功！"</span>);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>咦嘿嘿，我们再来看看gif运行效果：<br><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E8%8A%82%E6%B5%81.gif" alt></p>
 </li>
-<li><p>普通模式下，如果函数有多个重名的参数，可以用arguments[i]读取。严格模式下，多个重名的参数属于语法错误。</p>
+<li><p>节流即是：<code>指定时间间隔内只会执行一次任务。</code></p>
+</li>
+<li>应用：1. 懒加载要监听计算滚动条的位置，使用节流按一定时间的频率获取。2.用户点击提交按钮，假设我们知道接口大致的返回时间的情况下，我们使用节流，只允许一定时间内点击一次。</li>
+</ul>
+<p>此时问题就来了。<b>凭什么节流和防抖就不会制造出过多损耗呢？？？ </b><br>这个时候就要设计到渲染页面的机制了</p>
+
+<h1 id="重绘与回流"><a href="#重绘与回流" class="headerlink" title="重绘与回流"></a>重绘与回流</h1><ul>
+<li>在说浏览器渲染页面之前，我们需要知道两个点，一个叫浏览器解析URL，另一个就是现在我们要说的重绘和回流。<h2 id="重绘："><a href="#重绘：" class="headerlink" title="重绘："></a>重绘：</h2></li>
+<li>当元素样式的改变不影响布局时，浏览器将使用重绘对元素进行更新，此时只需要UI层面的重新像素绘制，因此<b>损耗较少</b></li>
+<li>常见的重绘操作有：<p>1.改变元素颜色<br>2.改变元素背景色<br>3.更多</p>
+
 </li>
 </ul>
-<p>比如下面这样的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> obj = &#123;</span><br><span class="line">  username: <span class="string">'smyh'</span>;</span><br><span class="line">  username: <span class="string">'vae'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码，在严格模式下属于语法错误，因为有重名的属性。</p>
-<h3 id="9、函数必须声明在顶层"><a href="#9、函数必须声明在顶层" class="headerlink" title="9、函数必须声明在顶层"></a>9、函数必须声明在顶层</h3><ul>
-<li>将来Javascript的新版本会引入”块级作用域”。为了与新版本接轨，严格模式只允许在全局作用域或函数作用域的顶层声明函数。也就是说，不允许在非函数的代码块内声明函数。<h3 id="10、新增关键字"><a href="#10、新增关键字" class="headerlink" title="10、新增关键字"></a>10、新增关键字</h3></li>
-<li>为了向将来Javascript的新版本过渡，严格模式新增了一些保留字：implements, interface, let, package, private, protected, public, static, yield。</li>
+<h2 id="回流："><a href="#回流：" class="headerlink" title="回流："></a>回流：</h2><ul>
+<li>又叫重排。顾名思义就是当元素的尺寸，结构或者触发某些属性时，浏览器会重新绘染页面，称为回流。此时浏览器需要重新经过计算，计算后重新页面布局，因此是<b>较重的操作</b></li>
+<li><p>常见的回流操作有：</p>
+<p>1.页面初次渲染<br>2.浏览器窗口大小改变<br>3.元素尺寸/位置/内容发生改变<br>4.元素字体大小变化<br>5.添加或者删除可见的 DOM 元素<br>6.激活 CSS 伪类（:hover……）<br>7.more ……</p>
+</li>
+<li><p><b>重点：回流必定会触发重绘，重绘不一定会触发回流。重绘的开销较小，回流的代价较高。</b></p>
+</li>
+<li><p>我们来看一个场景：界面上有个 div 框，用户可以在 input 框中输入 div 框的一些信息，例如宽、高等，输入完毕立即改变属性。但是，因为改变之后还要随时存储到数据库中，所以需要调用接口。如果不加限制……</p>
+</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E9%87%8D%E7%BB%98%E5%9B%9E%E6%B5%81.jpg" alt></p>
+<ul>
+<li>看到这里我们再返回看看之前我们抛出的问题：<b>凭什么节流和防抖就不会制造出过多损耗呢？？？</b>。答案就是有些事件会造成浏览器的回流，而回流会造成浏览器开销变得很大，频繁的回流想想都会炸。所以我们通过<b>节流</b>来防止这种增大浏览器开销的事情。</li>
+<li>那么我们要怎么样避免大量使用重绘和回流呢？</li>
+</ul>
+<p>1.避免频繁操作样式，可汇总后统一一次修改<br>2.尽量使用 class 进行样式修改，而不是直接操作样式<br>3.减少 DOM 的操作，可使用字符串一次性插入</p>
+
+<ul>
+<li>那么现在又有一个问题从浏览器输入URL到渲染成功的过程之中，究竟发生了什么？</li>
+</ul>
+<h1 id="浏览器解析URL"><a href="#浏览器解析URL" class="headerlink" title="浏览器解析URL"></a>浏览器解析URL</h1><ul>
+<li><p>思考两个问题：</p>
+<p>1.从浏览器输入 URL 到渲染成功的过程中，究竟发生了什么？<br>2.浏览器渲染过程中，发生了什么，是不是也有重绘与回流？</p>
+</li>
+<li><p>我们先来看第一个问题也是现在很多必问的一个问题：用户输入URL到页面渲染发生了什么？</p>
+<p>1.用户输入 URL 地址。<br>2.对 URL 地址进行 DNS 域名解析。<br>3.建立 TCP 连接（三次握手）。<br>4.浏览器发起 HTTP 请求报文。<br>5.服务器返回 HTTP 响应报文。<br>6.关闭 TCP 连接（四次挥手）。<br>7.浏览器解析文档资源并渲染页面。</p>
+
+</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/http1.jpg" alt></p>
+<ul>
+<li>接下来要处理的问题就是：<p>1.什么是 DNS 解析，它是怎么个流程？<br>2.什么是 TCP 三次握手，什么是 TCP 四次挥手，它们的流程是怎样的？<br>3.浏览器解析文档资源并渲染页面是个怎样的流程？</p>
+
+</li>
+</ul>
+<h1 id="TCP的三次握手与四次挥手"><a href="#TCP的三次握手与四次挥手" class="headerlink" title="TCP的三次握手与四次挥手"></a>TCP的三次握手与四次挥手</h1><ul>
+<li>TCP：（传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。简单点来说，作用就是将数据从一台主机可靠传输到另一台主机。</li>
+<li><b>三次握手：</b><p>1.<b>第一次握手</b>起初两端都处于 CLOSED 关闭状态，Client 将标志位 SYN 置为 1，随机产生一个值 seq = x，并将该数据包发送给 Server，Client 进入 SYN-SENT 状态，等待 Server 确认。<br>2.<b>第二次握手</b>Server 收到数据包后由标志位 SYN = 1 得知 Client 请求建立连接，Server 将标志位 SYN 和 ACK 都置为 1，ack = x + 1，随机产生一个值 seq = y，并将该数据包发送给Client以确认连接请求，Server 进入 SYN-RCVD 状态，此时操作系统为该 TCP 连接分配 TCP 缓存和变量。<br>3.<b>第三次握手</b>Client 收到确认后，检查 seq 是否为 x + 1，ACK 是否为 1，如果正确则将标志位 ACK 置为 1，ack = y + 1，并且此时操作系统为该 TCP 连接分配 TCP 缓存和变量，并将该数据包发送给 Server，Server 检查 ack 是否为 y + 1，ACK 是否为 1，如果正确则连接建立成功，Client 和 Server 进入 established 状态，完成三次握手，随后 Client 和 Server 就可以开始传输数据。</p>
+
+</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.jpg" alt></p>
+<ul>
+<li><b>四次挥手：</b><p>1.<b>第一次挥手</b>Client 的应用进程先向其 TCP 发出连接释放报文段（FIN = 1，序号 seq = u），并停止再发送数据，主动关闭 TCP 连接，进入 FIN-WAIT-1（终止等待1）状态，等待 Server 的确认。<br>2.<b>第二次挥手</b>Server 收到连接释放报文段后即发出确认报文段，（ACK = 1，确认号 ack = u + 1，序号 seq = v），Server 进入 CLOSE-WAIT（关闭等待）状态，此时的 TCP 处于半关闭状态，Client 到 Server 的连接释放。<br>3.<b>第三次挥手</b>Server 已经没有要向 Client 发出的数据了，Server 发出连接释放报文段（FIN = 1，ACK = 1，序号 seq = w，确认号 ack = u + 1），Server 进入 LAST-ACK（最后确认）状态，等待 Client 的确认。<br>4.<b>第四次挥手</b>Client 收到 Server 的连接释放报文段后，对此发出确认报文段（ACK = 1，seq = u + 1，ack = w + 1），Client 进入 TIME-WAIT（时间等待）状态。此时 TCP 未释放掉，需要经过时间等待计时器设置的时间 2MSL 后，Client 才进入 CLOSED 状态。</p>
+
+</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP4%E6%AC%A1%E6%8C%A5%E6%89%8B3.jpg" alt></p>
+<h1 id="浏览器渲染页面"><a href="#浏览器渲染页面" class="headerlink" title="浏览器渲染页面"></a>浏览器渲染页面</h1><ul>
+<li>1.浏览器通过HTMLParser根据深度遍历的原则解析成DOM Tree。</li>
+<li>2.浏览器通过 CSSParser 将 CSS 解析成 CSS Rule Tree（CSSOM Tree）。</li>
+<li>3.浏览器将 JavaScript 通过 DOM API 或者 CSSOM API 将 JS 代码解析并应用到布局中，按要求呈现响应的结果。</li>
+<li>4.根据 DOM 树和 CSSOM 树来构造 render Tree。</li>
+<li>5.layout：重排（也可以叫回流），当 render tree 中任一节点的几何尺寸发生改变，render tree 就会重新布局，重新来计算所有节点在屏幕的位置。</li>
+<li>6.repaint：重绘，当 render tree 中任一元素样式属性（几何尺寸没改变）发生改变时，render tree 都会重新画，比如字体颜色，背景等变化。</li>
+<li>7.paint：遍历 render tree，并调动硬件图形 API 来绘制每个节点。<p>上图：</p>
+
+</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2.jpg" alt></p>
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
+<li><b>防抖：</b>任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。</li>
+<li><b>节流：</b>指定时间间隔内只会执行一次任务。</li>
+<li><b>防抖和节流：</b>减少浏览器的开销</li>
+<li><b>重绘：</b>当元素样式的改变不影响布局时，浏览器将使用重绘对元素进行更新，此时只需要UI层面的重新像素绘制，因此<b>损耗较少</b></li>
+<li><b>回流：</b>结构或者触发某些属性时，浏览器会重新绘染页面，称为回流。</li>
+<li><b>重绘和节流：</b>只告诉了我们浏览器在 CSS 上的渲染，我们需要进一步了解 浏览器渲染页面 的详细过程</li>
+<li><b>TCP:</b>是一种面向连接的、可靠的、基于字节流的传输层通信协议。</li>
+<li><b>TCP的三次握手</b>客户端和服务端都需要直到各自可收发</li>
+<li><b>TCP的四次挥手</b>因为是双方彼此都建立了连接，因此双方都要释放自己的连接</li>
+<li><b>浏览器渲染页面</b></li>
+</ul>
+<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<li><a href="https://juejin.im/post/5c87b54ce51d455f7943dddb" target="_blank" rel="noopener">https://juejin.im/post/5c87b54ce51d455f7943dddb</a></li>
 </ul>
 <hr>
 <p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
@@ -256,7 +336,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随手笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">防抖与节流</a>
         		</li>
       		
 		</ul>
@@ -312,7 +392,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/05/25/3.ES5中的一些扩展/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/08/04/11-JS 防抖与节流学习/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -326,18 +406,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/31/4-node.jsExpress框架学习1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          4-node.js-Express框架学习-认识与基本操作
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/18/2.前端常见算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2.前端学习——冒泡排序和快速排序学习</div>
+    <a href="/2019/08/01/10-必说清这js中的原型和原型链/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">10-誓必说清这js中的原型和原型链</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -356,6 +427,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#防抖与节流"><span class="toc-number">1.</span> <span class="toc-text">防抖与节流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-number">1.1.</span> <span class="toc-text">1.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-防抖"><span class="toc-number">1.2.</span> <span class="toc-text">2.防抖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-节流"><span class="toc-number">1.3.</span> <span class="toc-text">3.节流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重绘与回流"><span class="toc-number">2.</span> <span class="toc-text">重绘与回流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#重绘："><span class="toc-number">2.1.</span> <span class="toc-text">重绘：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回流："><span class="toc-number">2.2.</span> <span class="toc-text">回流：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器解析URL"><span class="toc-number">3.</span> <span class="toc-text">浏览器解析URL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP的三次握手与四次挥手"><span class="toc-number">4.</span> <span class="toc-text">TCP的三次握手与四次挥手</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器渲染页面"><span class="toc-number">5.</span> <span class="toc-text">浏览器渲染页面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">5.1.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">5.2.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
