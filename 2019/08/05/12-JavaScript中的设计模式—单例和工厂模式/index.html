@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>Tag: 原型和原型链 | Qbenben</title>
+  <title>12-JavaScript中的设计模式—单例和工厂模式 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://qbenben.com/tags/原型和原型链/index.html">
+  <meta name="description" content="body,li,code{font-size:16px;}  本篇介绍JavaScript中常见的设计模式之单例模式和工厂模式的学习">
+<meta name="keywords" content="JavaScript,设计模式,单例模式,工厂模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12-JavaScript中的设计模式—单例和工厂模式">
+<meta property="og:url" content="http://qbenben.com/2019/08/05/12-JavaScript中的设计模式—单例和工厂模式/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="body,li,code{font-size:16px;}  本篇介绍JavaScript中常见的设计模式之单例模式和工厂模式的学习">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:updated_time" content="2019-08-05T08:56:02.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="12-JavaScript中的设计模式—单例和工厂模式">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  本篇介绍JavaScript中常见的设计模式之单例模式和工厂模式的学习">
+<meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,36 +145,122 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-12-JavaScript中的设计模式—单例和工厂模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/01/10-必说清这js中的原型和原型链/" class="archive-article-date">
-  	<time datetime="2019-08-01T09:11:46.831Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/01/10-必说清这js中的原型和原型链/">10-誓必说清这js中的原型和原型链</a>
+    <h1 class="article-title" itemprop="name">
+      12-JavaScript中的设计模式—单例和工厂模式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/05/12-JavaScript中的设计模式—单例和工厂模式/" class="archive-article-date">
+  	<time datetime="2019-08-05T08:00:29.839Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>本篇介绍JavaScript中常见的设计模式之单例模式和工厂模式的学习</p>
+
+<a id="more"></a>
+<h1 id="单例模式与工厂模式"><a href="#单例模式与工厂模式" class="headerlink" title="单例模式与工厂模式"></a>单例模式与工厂模式</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><ul>
+<li>奔奔刚开始接触到JavaScript中常见的设计模式是在Vue的学习中，Vue的双向绑定原理中有使用到<code>发布者-订阅者模式</code>，于是乎奔奔开始接触JavaScript设计模式。</li>
+<li>其实设计模式就是一套被前人总结出来的代码设计经验的总结，为了可重用代码，让代码更容易的被他人理解并保证代码的可靠性。使得我们自己在设计代码的时候，要考虑这些情况，尽可能遵守这些原则。</li>
+<li>下面的设计模式其实是基于面向对象语言所设计的，并不是所有都适用于JavaScript。</li>
+</ul>
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png" alt></p>
+<ul>
+<li>下面奔奔就基于自己的博客记录来对设计模式进行入门学习</li>
+</ul>
+<h2 id="2-单例模式："><a href="#2-单例模式：" class="headerlink" title="2.单例模式："></a>2.单例模式：</h2><ul>
+<li>概念：单例模式定义了一个对象的创建过程，此对象只有一个单独的实例，并提供一个访问它的全局访问点。也可以说单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。简单点来说：<b>单例模式，即保证一个类有且仅有一个实例。作用就是避免重复创建对象，优化性能。</b></li>
+<li>单例模式实习的方式有很多种，下面介绍两种：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单体模式</span></span><br><span class="line"><span class="keyword">let</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.instance = <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Singleton.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取实例对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInstance</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!<span class="keyword">this</span>.instance) &#123;</span><br><span class="line">      <span class="keyword">this</span>.instance = <span class="keyword">new</span> Singleton(name);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.instance;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 测试单体模式的实例</span></span><br><span class="line"><span class="keyword">let</span> a = getInstance(<span class="string">"aa"</span>);</span><br><span class="line"><span class="keyword">let</span> b = getInstance(<span class="string">"bb"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a === b); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>还有一种实现方式，我们用闭包来实现单例：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> single = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> unique;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果该实例存在，则直接返回，否则就对其实例化</span></span><br><span class="line">        <span class="keyword">if</span>( unique === <span class="literal">undefined</span> )&#123;</span><br><span class="line">            unique = <span class="keyword">new</span> Construct();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> unique;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// ... 生成单例的构造函数的代码</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getInstance : getInstance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用的场景：单例模式是一种常用的模式，有一些对象我们往往只需要一个，比如全局缓存、浏览器的window对象。在js开发中，单例模式的用途同样非常广泛。试想一下，当我们单击登录按钮的时候，页面中会出现一个登录框，而这个浮窗是唯一的，无论单击多少次登录按钮，这个浮窗只会被创建一次。因此这个登录浮窗就适合用单例模式。</p>
+</li>
+<li><p>总结——单例模式场景：</p>
+<p>1.可以用它来划分命名空间<br>2.借助单例模式，可以把代码组织的更为一致，方便阅读与维护</p>
+
+</li>
+</ul>
+<h2 id="3-工厂模式："><a href="#3-工厂模式：" class="headerlink" title="3.工厂模式："></a>3.工厂模式：</h2><ul>
+<li><p>概念：提供创建对象的接口，意思就是根据领导（调用者）的指示（参数），生产相应的产品（对象）。<b>工厂模式的设计思想是通过一个工厂函数，快速批量地建立一系列相同的类。我们也可以用来创建对象、方法。工厂就是把成员对象的创建工作转交给一个外部对象</b></p>
+</li>
+<li><p>下面我们来看看简单的工厂模式创造对象</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PersonFactory</span>(<span class="params">name</span>) </span>&#123; <span class="comment">// 工厂函数</span></span><br><span class="line">  <span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">  obj.name = name;    </span><br><span class="line">  obj.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> PersonFactory(<span class="string">"张三"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// 张三</span></span><br><span class="line"><span class="built_in">console</span>.log(person.sayName()); <span class="comment">// 张三</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>应用场景：</p>
+<p>1.对象的构建十分复杂<br>2.需要依赖具体环境创建不同实例<br>3.处理大量具有相同属性的小对象</p>
+</li>
+<li><p>优点：</p>
+<p>可以实现一些相同的方法，这些相同的方法我们可以放在父类中编写代码，那么需要实现具体的业务逻辑，那么可以放在子类中重写该父类的方法，去实现自己的业务逻辑。<br>也就是说两点<br>1.弱化对象间的耦合，防止代码的重复。在一个方法中进行类的实例化，可以消除重复性的代码。消除对象之间的耦合(也就是相互影响)<br>2.重复性的代码可以放在父类去编写，子类继承于父类的所有成员属性和方法，子类只专注于实现自己的业务逻辑。</p>
+</li>
+<li><p>缺点：</p>
+<p>当工厂增加到一定程度的时候，提升了代码的复杂度，可读性下降。而且没有解决对象的识别问题，即怎么知道一个对象的类型。</p>
+
+
+
+</li>
+</ul>
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
+<li><b>单例模式：在它的核心结构中值包含一个被称为单例的特殊类。一个类只有一个实例，即一个类只有一个对象实例。</b></li>
+<li><b>工厂模式：在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</b></li>
+</ul>
+<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<li><a href="https://juejin.im/post/5d3aae066fb9a07ea944b6cb#heading-3" target="_blank" rel="noopener">https://juejin.im/post/5d3aae066fb9a07ea944b6cb#heading-3</a></li>
+<li><a href="https://juejin.im/post/5d32f164f265da1bc64bfebf#heading-6" target="_blank" rel="noopener">https://juejin.im/post/5d32f164f265da1bc64bfebf#heading-6</a></li>
+</ul>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -181,25 +270,133 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">原型和原型链</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单例模式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">工厂模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/08/05/12-JavaScript中的设计模式—单例和工厂模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/08/04/11-JS 防抖与节流学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">11-JS 防抖与节流学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#单例模式与工厂模式"><span class="toc-number">1.</span> <span class="toc-text">单例模式与工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-number">1.1.</span> <span class="toc-text">1.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-单例模式："><span class="toc-number">1.2.</span> <span class="toc-text">2.单例模式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-工厂模式："><span class="toc-number">1.3.</span> <span class="toc-text">3.工厂模式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.4.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.5.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -222,9 +419,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
