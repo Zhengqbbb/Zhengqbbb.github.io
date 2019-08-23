@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>4-node.js-Express框架学习-认识与基本操作 | Qbenben</title>
+  <title>12-JavaScript中的设计模式—装饰者模式 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
-<meta name="keywords" content="nodejs,Express">
+  <meta name="description" content="body,li,code{font-size:16px;}  奔奔找到实习拉，现在有时间巩固基础，写博客了这次我们接着上一次博客上到的设计模式，记录一下装饰者模式的学习">
+<meta name="keywords" content="JavaScript,装饰者模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4-node.js-Express框架学习-认识与基本操作">
-<meta property="og:url" content="http://qbenben.com/2019/05/31/4-node.jsExpress框架学习1/index.html">
+<meta property="og:title" content="12-JavaScript中的设计模式—装饰者模式">
+<meta property="og:url" content="http://qbenben.com/2019/08/23/13-JavaScript中的装饰者模式/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta property="og:description" content="body,li,code{font-size:16px;}  奔奔找到实习拉，现在有时间巩固基础，写博客了这次我们接着上一次博客上到的设计模式，记录一下装饰者模式的学习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-01T01:58:42.315Z">
+<meta property="og:updated_time" content="2019-08-23T15:33:09.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4-node.js-Express框架学习-认识与基本操作">
-<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——1 对Express认识与基本操作">
+<meta name="twitter:title" content="12-JavaScript中的设计模式—装饰者模式">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  奔奔找到实习拉，现在有时间巩固基础，写博客了这次我们接着上一次博客上到的设计模式，记录一下装饰者模式的学习">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -143,20 +143,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-4-node.jsExpress框架学习1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-13-JavaScript中的装饰者模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      4-node.js-Express框架学习-认识与基本操作
+      12-JavaScript中的设计模式—装饰者模式
     </h1>
   
 
         
-        <a href="/2019/05/31/4-node.jsExpress框架学习1/" class="archive-article-date">
-  	<time datetime="2019-05-30T16:44:05.193Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+        <a href="/2019/08/23/13-JavaScript中的装饰者模式/" class="archive-article-date">
+  	<time datetime="2019-08-23T13:56:16.679Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
 </a>
         
       </header>
@@ -165,30 +165,39 @@
       
         <style>body,li,code{font-size:16px;}</style>
 
-<p>Qben最近学习node.js记录Express框架的学习笔记——1</p>
-<p>对Express认识与基本操作</p>
-
+<p>奔奔找到实习拉，现在有时间巩固基础，写博客了</p><br><p>这次我们接着上一次博客上到的设计模式，记录一下装饰者模式的学习</p>
 
 <a id="more"></a>
-<h2 id="简单搭建Express"><a href="#简单搭建Express" class="headerlink" title="简单搭建Express"></a>简单搭建Express</h2><ul>
-<li>在nvm和node.js环境作为前提。</li>
-<li>在所在开发的文件中运行命令：<code>npm install express –save</code></li>
-<li>新建文件：<code>server.js</code>该文件是直接在操作系统运行，独立浏览器之外的js文件</li>
+<h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><ul>
+<li>所谓的装饰者模式，就是动态给类或是对象增加职责的设计模式。他在不改变类或者对象的基础上，在程序的运行期间动态的添加职责。这种设计模式非常符合敏捷开发的设计想法：<b>先提炼出产品的（Minimum Viable Product，最小可用产品）</b>，再通过快速迭代的方式添加功能。</li>
+<li>与继承相比，装饰者是一种更轻便灵活的做法。</li>
+<li><b>特点：</b>可以动态的给某个对象添加额外的职责，而不会影响从这个类派生的其他对象</li>
+<li><b>作用：</b>装饰者模式的作用就是为对象动态的加入某些行为。</li>
 </ul>
-<h2 id="快速入门路由"><a href="#快速入门路由" class="headerlink" title="快速入门路由"></a>快速入门路由</h2><ul>
-<li><code>const express = require(express)</code>引用Express包返回一个函数</li>
-<li><code>const app =express()</code>实例化</li>
-<li>使用get方式请求：req(请求数据)，res(响应数据)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">   res.send([</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">1</span>,<span class="attr">user</span>: <span class="string">'qbenben1'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">2</span>,<span class="attr">user</span>: <span class="string">'qbenben2'</span>&#125;,</span><br><span class="line">     &#123;<span class="attr">id</span>: <span class="number">3</span>,<span class="attr">user</span>: <span class="string">'qbenben3'</span>&#125;,</span><br><span class="line">   ]);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="2-为什么使用装饰者模式"><a href="#2-为什么使用装饰者模式" class="headerlink" title="2.为什么使用装饰者模式"></a>2.为什么使用装饰者模式</h2><ul>
+<li>在我们传统面向对象语言之中，为对象添加功能常使用继承</li>
+<li>但是继承也会很多缺点：<p>1.超类子类强耦合，超类改变导致子类改变<br>2.超类内部细节对子类可见，破坏了封装性<br>3.完成功能复用同时，可能会创造大量子类</p>
+
 </li>
 </ul>
-<ul>
-<li>设置监听:在3000端口</li>
+<h2 id="3-传统方法实现："><a href="#3-传统方法实现：" class="headerlink" title="3.传统方法实现："></a>3.传统方法实现：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原始车类</span></span><br><span class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"></span><br><span class="line">Car.prototype.drive = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'车辆启动'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//装饰类</span></span><br><span class="line"><span class="keyword">var</span> AutopilotDecorator = <span class="function"><span class="keyword">function</span> (<span class="params">car</span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">this</span>.car = car;</span><br><span class="line">&#125;</span><br><span class="line">AutopilotDecorator.prototype.drive = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">this</span>.car.drive();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'启动自动驾驶模式'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> car = <span class="keyword">new</span> Car();</span><br><span class="line">car = <span class="keyword">new</span> AutopilotDecorator(car);</span><br><span class="line">car.drive();<span class="comment">//车辆启动</span></span><br><span class="line">            <span class="comment">//启动自动驾驶模式</span></span><br></pre></td></tr></table></figure>
+<p>这样给对象动态的增加职责的方式就没有改变对象自身，一个对象放入另一个对象，形成了一条装饰链（一个聚合对象）</p><br><p>装饰器类要维护目标对象的一个引用，同时要实现目标类的所有接口（这个例子里的drive方法，如果还有其它方法，比如brake，AutopilotDecorator也要实现）。调用方法时，先执行目标对象原有的方法，再执行自行添加的特性。</p><br><p>当接口比较多，装饰器也比较多时，可以独立抽取一个装饰器父类，实现目标类的所有接口，再创建真正的装饰器来继承这个父类。</p>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原始车类</span></span><br><span class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Car.prototype.drive = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'启动车辆'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//多了一个刹车方法</span></span><br><span class="line">Car.prototype.brake = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'刹车'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现所有接口的装饰器父类</span></span><br><span class="line"><span class="keyword">var</span> CarDecorator = <span class="function"><span class="keyword">function</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.car = car;</span><br><span class="line">&#125;</span><br><span class="line">CarDecorator.prototype = &#123;</span><br><span class="line">    drive: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.car.drive();</span><br><span class="line">    &#125;,</span><br><span class="line">    brake: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.car.brake();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//真正的装饰器 AutopilotDecorator 一号</span></span><br><span class="line"><span class="keyword">var</span> AutopilotDecorator = <span class="function"><span class="keyword">function</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">    CarDecorator.call(<span class="keyword">this</span>, car);</span><br><span class="line">&#125;</span><br><span class="line">AutopilotDecorator.prototype = <span class="keyword">new</span> CarDecorator();</span><br><span class="line">AutopilotDecorator.prototype.drive = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.car.drive();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'启动自动驾驶模式'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//真正的装饰器 HybridDecorator  二号</span></span><br><span class="line"><span class="keyword">var</span> HybridDecorator = <span class="function"><span class="keyword">function</span>(<span class="params">car</span>) </span>&#123;</span><br><span class="line">    CarDecorator.call(<span class="keyword">this</span>, car);</span><br><span class="line">&#125;</span><br><span class="line">HybridDecorator.prototype = <span class="keyword">new</span> CarDecorator();</span><br><span class="line">HybridDecorator.prototype.brake = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.car.brake();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'启动充电模式'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> car = <span class="keyword">new</span> Car();</span><br><span class="line">car = <span class="keyword">new</span> AutopilotDecorator(car);</span><br><span class="line">car = <span class="keyword">new</span> HybridDecorator(car);</span><br><span class="line">car.drive();    <span class="comment">//乞丐版；启动自动驾驶模式；</span></span><br><span class="line">car.brake();    <span class="comment">//刹车；启动充电模式；</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-函数功能扩展："><a href="#4-函数功能扩展：" class="headerlink" title="4.函数功能扩展："></a>4.函数功能扩展：</h2><h2 id="5-JS基于对象的实现方式："><a href="#5-JS基于对象的实现方式：" class="headerlink" title="5.JS基于对象的实现方式："></a>5.JS基于对象的实现方式：</h2><h2 id="6-AOP装饰函数："><a href="#6-AOP装饰函数：" class="headerlink" title="6.AOP装饰函数："></a>6.AOP装饰函数：</h2><h2 id="7-ES7语法糖实现："><a href="#7-ES7语法糖实现：" class="headerlink" title="7.ES7语法糖实现："></a>7.ES7语法糖实现：</h2><h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
+<li><b>装饰者模式：在不改变元对象的基础上，对这个对象进行包装和拓展（包括添加属性和方法），从而使这个对象可以有更复杂的功能。</b></li>
+<li><p>缺点：</p>
+<p>1.装饰链叠加了函数作用域，如果过长也会产生性能问题<br>2.如果原函数上保存了属性，返回新函数后属性会丢失。</p>
+</li>
+<li><p>装饰者模式是一种十分常用且功能强大的模式，利用ES7的语法糖，我们能用非常简洁的方式来表达装饰的意图.</p>
+</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'App'</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>启动服务器进行监听：我们有时候的更改需要暂停服务器再启动而如果下载<code>nodemon</code>后再启动nodemon服务器，我们更改会使得服务器暂停再启动，达到便利，全局下载命令：<code>npm i nodemon -g –verbose</code><p>启动服务器:<code>nodemon server.js</code></p></li>
+<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<li><a href="https://juejin.im/post/59ce0d725188257e7a42b6a1" target="_blank" rel="noopener">https://juejin.im/post/59ce0d725188257e7a42b6a1</a></li>
+<li><a href="https://segmentfault.com/a/1190000013664124#articleHeader0" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013664124#articleHeader0</a></li>
 </ul>
-<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a><p style="font-size:19px;">学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></p></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
 
       
 
@@ -228,11 +237,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">装饰者模式</a>
         		</li>
       		
 		</ul>
@@ -288,7 +297,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/05/31/4-node.jsExpress框架学习1/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/08/23/13-JavaScript中的装饰者模式/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +311,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/01/5-node.jsExpress框架学习2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          5-node.js-Express框架学习-静态文件托管以及CORS跨域请求
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/25/3.ES5中的一些扩展/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3.前端学习——ES5中的严格模式</div>
+    <a href="/2019/08/05/12-JavaScript中的设计模式—单例和工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">12-JavaScript中的设计模式—单例和工厂模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -340,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单搭建Express"><span class="toc-number">1.</span> <span class="toc-text">简单搭建Express</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门路由"><span class="toc-number">2.</span> <span class="toc-text">快速入门路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">3.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">4.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#装饰者模式"><span class="toc-number">1.</span> <span class="toc-text">装饰者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-为什么使用装饰者模式"><span class="toc-number">1.2.</span> <span class="toc-text">2.为什么使用装饰者模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-传统方法实现："><span class="toc-number">1.3.</span> <span class="toc-text">3.传统方法实现：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-函数功能扩展："><span class="toc-number">1.4.</span> <span class="toc-text">4.函数功能扩展：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-JS基于对象的实现方式："><span class="toc-number">1.5.</span> <span class="toc-text">5.JS基于对象的实现方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-AOP装饰函数："><span class="toc-number">1.6.</span> <span class="toc-text">6.AOP装饰函数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-ES7语法糖实现："><span class="toc-number">1.7.</span> <span class="toc-text">7.ES7语法糖实现：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.8.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.9.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
