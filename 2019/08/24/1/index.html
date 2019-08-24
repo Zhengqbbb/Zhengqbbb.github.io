@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>6-node.js-Express框架学习-连接MongoDB数据库以及操作 | Qbenben</title>
+  <title>Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——3 基于Express连接MongoDB数据库以及增删改查操作">
-<meta name="keywords" content="nodejs,Express">
+  <meta name="description" content="function autopilotDecorator(target, key, descriptor) {     const method = descriptor.value;          descriptor.value = () =&amp;gt; {         method.apply(target);         console.log(&apos;启动自动驾驶模式&apos;);     }">
+<meta name="keywords" content="��ˣ����ѧϰ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6-node.js-Express框架学习-连接MongoDB数据库以及操作">
-<meta property="og:url" content="http://qbenben.com/2019/06/01/6-node.jsExpress框架学习3/index.html">
+<meta property="og:title" content="Qbenben">
+<meta property="og:url" content="http://qbenben.com/2019/08/24/1/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——3 基于Express连接MongoDB数据库以及增删改查操作">
+<meta property="og:description" content="function autopilotDecorator(target, key, descriptor) {     const method = descriptor.value;          descriptor.value = () =&amp;gt; {         method.apply(target);         console.log(&apos;启动自动驾驶模式&apos;);     }">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-22T15:10:02.079Z">
+<meta property="og:updated_time" content="2019-08-24T09:13:29.006Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="6-node.js-Express框架学习-连接MongoDB数据库以及操作">
-<meta name="twitter:description" content="body,li,code{font-size:16px;}  Qben最近学习node.js记录Express框架的学习笔记——3 基于Express连接MongoDB数据库以及增删改查操作">
+<meta name="twitter:title" content="Qbenben">
+<meta name="twitter:description" content="function autopilotDecorator(target, key, descriptor) {     const method = descriptor.value;          descriptor.value = () =&amp;gt; {         method.apply(target);         console.log(&apos;启动自动驾驶模式&apos;);     }">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -143,91 +143,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-6-node.jsExpress框架学习3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      6-node.js-Express框架学习-连接MongoDB数据库以及操作
-    </h1>
-  
-
-        
-        <a href="/2019/06/01/6-node.jsExpress框架学习3/" class="archive-article-date">
-  	<time datetime="2019-06-01T01:54:34.615Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-01</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <style>body,li,code{font-size:16px;}</style>
+        function autopilotDecorator(target, key, descriptor) {
+    const method = descriptor.value;
+    
+    descriptor.value = () => {
+        method.apply(target);
+        console.log('启动自动驾驶模式');
+    }
+    
+    return descriptor;
+}
 
-<p>Qben最近学习node.js记录Express框架的学习笔记——3</p>
-<p>基于Express连接MongoDB数据库以及增删改查操作</p>
+class Car {
+    @autopilotDecorator
+    drive() {
+        console.log('乞丐版');
+    }
+}
 
-<a id="more"></a>
-<h2 id="Mongo基础"><a href="#Mongo基础" class="headerlink" title="Mongo基础"></a>Mongo基础</h2><ul>
-<li><p>在node.js中使用最方便应该是MongoDB数据库，第一步肯定是下载和环境变量配置好MongoDB数据库。</p>
-</li>
-<li><p>在node.js中要连接MongoDB数据库的一个工具<code>mongoose</code>在命名行中输入<code>npm i mongoose</code></p>
-</li>
-<li><p>连接，在<code>server.js</code>的最顶上<code>const mongoose = require(‘mongoose’)</code>专门用来在node.js中连接MongDB数据的一个驱动。<br>接下来连接并开启通道<code>mongoose.connect(‘mongodb://localhost:27017/express-test’,{useNewUrlParser:true})</code></p>
-</li>
-<li>定义创建数据模型:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> Product = mongoose.model(<span class="string">'Product'</span>,<span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">  title: <span class="built_in">String</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>test使用一下，首先是异步请求数据模型所以send方法中要加入<code>res.send(await Product.find())</code>node.js异步操作连接MongoDB数据库所以方法名前要用<code>async</code>声明这是一个异步的操作函数。async-await这是成对出现的。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/product'</span>,<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="keyword">await</span> Product.find())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="MongoDB查询操作："><a href="#MongoDB查询操作：" class="headerlink" title="MongoDB查询操作："></a>MongoDB查询操作：</h2><ul>
-<li><p>一般来说我们会把查询方法分离出来如:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/products'</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> Product.find()</span><br><span class="line">  res.send(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><body><p>此时我们在find()方法后面链式方法，其中<code>limit()</code>限制方法，参数传入你想一次查询几条数据。配合<code>skip()</code>跳过方法，参数传入跳过多少条数据从而实现分页的功能</p></body></li>
-<li><p><body>还有<code>where()</code>表示查询条件,参数传入json形式的条件对象</body></p></li>
-<li><p><body>同时还有排序方法<code>sort()</code>传入的也是json形式的对象，键是排序的对象，值为<code>1</code>则为正序,值为<code>-1</code>则为倒序</body></p></li>
-<li>小demo:通过id查找,其中<code>req.params.XXX</code>表示客户端传入的参数</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/products/:id'</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> Product.findById(req.params.id)</span><br><span class="line">  res.send(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="用rest-client测试接口，MongoDB增加操作"><a href="#用rest-client测试接口，MongoDB增加操作" class="headerlink" title="用rest client测试接口，MongoDB增加操作"></a>用rest client测试接口，MongoDB增加操作</h2><ul>
-<li>此时用get不太合适，但凡是提交数据我们一般用的是post请求更为安全，可是用了post请求我们直接访问页面是请求不到数据的，此时我们要用到一个类似于Postman软件的一个VSCode插件<code>rest client</code>，是一个用代码方式使用post请求。在根目录新建一个<code>test.http</code>来测试一波，在文件中写<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@url = http://localhost:4000/</span><br><span class="line">GET &#123;&#123;url&#125;&#125;products/</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<body>点击上方Send Request，OK~以后我们就不用用页面的方式测试接口拉。</body>
-
-<ul>
-<li><p>注意如果我们要请求json数据的话要在测试接口后面加上<code>Content-Type: application/json</code>再加入要测试增加的json对象</p>
-</li>
-<li><p>增加数据：首先需要在server的上方加入<code>app.use(express.json());</code>表示服务器端允许客户端发送过来的json数据格式。</p>
-</li>
-<li>然后在方法中先定义请求的数据对象<code>const data = req.body</code>再使用<code>create(data)</code>异步方法创建出来。</li>
-<li><p>demo删除数据——server.js:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/products'</span>,<span class="keyword">async</span>(req,res)=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> data = req.body;</span><br><span class="line">  <span class="keyword">const</span> product = <span class="keyword">await</span> Product.create(data);</span><br><span class="line">  res.send(product);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST &#123;&#123;url&#125;&#125;products/</span><br><span class="line"><span class="attribute">Content-Type</span>: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "title": "4"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="MongoDB修改与PUT请求"><a href="#MongoDB修改与PUT请求" class="headerlink" title="MongoDB修改与PUT请求"></a>MongoDB修改与PUT请求</h2><ul>
-<li>修改的话有两种方式：一个是PUT和PATCH方式，一般用的比较多的是PUT，两者区别是PUT是全部修改，PATCH是部分修改。</li>
-<li>首先是通过ID在数据库找到该产品，再从<code>req.body</code>找到请求过来的修改值赋值给该产品，然后通过<code>save()</code>异步方法保存。</li>
-<li>demo-修改:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.put(<span class="string">'/products/:id'</span>,<span class="keyword">async</span> (req,res)=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> product = <span class="keyword">await</span> Product.findById(req.params.id)</span><br><span class="line">  product.title = req.body.title</span><br><span class="line">  <span class="keyword">await</span> product.save()</span><br><span class="line">  res.send(product)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Mongo删除"><a href="#Mongo删除" class="headerlink" title="Mongo删除"></a>Mongo删除</h2><ul>
-<li>使用DELETE方式</li>
-<li><p>他与修改也有些类似，首先通过id找到对应的数据，使用异步方法<code>remove()</code>移除数据库中的数据。返回一个删除成功的状态。</p>
-</li>
-<li><p>demo-删除：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.delete(<span class="string">'/products/:id'</span>,<span class="keyword">async</span>(req,rep)=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> product = <span class="keyword">await</span> Product.findById(req.params.id);</span><br><span class="line">  <span class="keyword">await</span> product.remove();</span><br><span class="line">  rep.send(&#123;</span><br><span class="line">      sucess:<span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="引用："><a href="#引用：" class="headerlink" title="引用："></a>引用：</h2><h2 id="学习路径-B站up主：-全栈之巅"><a href="#学习路径-B站up主：-全栈之巅" class="headerlink" title="学习路径-B站up主： 全栈之巅"></a><p style="font-size:19px;">学习路径-B站up主： <a href="https://space.bilibili.com/341919508/" target="_blank" rel="noopener">全栈之巅</a></p></h2><p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
-
+let car = new Car();
+car.drive();  
       
 
       
@@ -261,21 +201,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -326,7 +251,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/06/01/6-node.jsExpress框架学习3/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2019/08/24/1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -340,18 +265,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/09/7-异步Promise的学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          7-异步Promise的学习
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/01/5-node.jsExpress框架学习2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">5-node.js-Express框架学习-静态文件托管以及CORS跨域请求</div>
+    <a href="/2019/08/23/13-JavaScript中的装饰者模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">12-JavaScript中的设计模式—装饰者模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -370,19 +286,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mongo基础"><span class="toc-number">1.</span> <span class="toc-text">Mongo基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB查询操作："><span class="toc-number">2.</span> <span class="toc-text">MongoDB查询操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用rest-client测试接口，MongoDB增加操作"><span class="toc-number">3.</span> <span class="toc-text">用rest client测试接口，MongoDB增加操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB修改与PUT请求"><span class="toc-number">4.</span> <span class="toc-text">MongoDB修改与PUT请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mongo删除"><span class="toc-number">5.</span> <span class="toc-text">Mongo删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用："><span class="toc-number">6.</span> <span class="toc-text">引用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习路径-B站up主：-全栈之巅"><span class="toc-number">7.</span> <span class="toc-text">学习路径-B站up主： 全栈之巅</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
