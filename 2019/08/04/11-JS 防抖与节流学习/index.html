@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.jpg">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/TCP4%E6%AC%A1%E6%8C%A5%E6%89%8B3.jpg">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2.jpg">
-<meta property="og:updated_time" content="2019-08-04T11:01:55.748Z">
+<meta property="og:updated_time" content="2019-08-28T15:54:56.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11-JS 防抖与节流学习">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  本篇介绍的是JS防抖与节流以及扩展知识点的学习">
@@ -195,7 +195,9 @@
 </li>
 <li>场景：有个输入框，输入之后会调用接口，获取联想词。但是，因为频繁调用接口不太好，所以我们在代码中使用防抖功能，只有在用户输入完毕的一段时间后，才会调用接口，出现联想词。</li>
 <li>简单点讲：<b>这件事儿需要等待，如果你反复催促，我就重新计时！</b></li>
+<li>8月28 实习学习记录防抖函数：</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span> (<span class="params">callback, ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> times;</span><br><span class="line">  <span class="keyword">var</span> outArgs = <span class="built_in">arguments</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> innerArgs = <span class="built_in">arguments</span></span><br><span class="line">    clearTimeout(times) <span class="comment">// 如果你在某段时间之内再次触发，清除上一次触发的定时器，重新添加定时器。</span></span><br><span class="line">    times = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      callback.apply(self, [...innerArgs, ...[...outArgs].splice(<span class="number">2</span>)]);</span><br><span class="line">    &#125;, ms)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="3-节流"><a href="#3-节流" class="headerlink" title="3.节流"></a>3.节流</h2><ul>
 <li>上面说完防抖，下面我们来讲讲节流。先上代码</li>
 </ul>
@@ -206,7 +208,9 @@
 <li><p>节流即是：<code>指定时间间隔内只会执行一次任务。</code></p>
 </li>
 <li>应用：1. 懒加载要监听计算滚动条的位置，使用节流按一定时间的频率获取。2.用户点击提交按钮，假设我们知道接口大致的返回时间的情况下，我们使用节流，只允许一定时间内点击一次。</li>
+<li>8月28 实习学习记录防抖函数：</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span> (<span class="params">callback, ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> last = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> outArgs = <span class="built_in">arguments</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> innerArgs = <span class="built_in">arguments</span></span><br><span class="line">    <span class="keyword">var</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (now &gt; last + ms) &#123;</span><br><span class="line">      <span class="comment">// 超过节流时间，执行一次,并将上次执行时间戳更新。</span></span><br><span class="line">      last = now</span><br><span class="line">      callback.apply(<span class="keyword">this</span>, [...innerArgs, ...[...outArgs].splice(<span class="number">2</span>)]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此时问题就来了。<b>凭什么节流和防抖就不会制造出过多损耗呢？？？ </b><br>这个时候就要设计到渲染页面的机制了</p>
 
 <h1 id="重绘与回流"><a href="#重绘与回流" class="headerlink" title="重绘与回流"></a>重绘与回流</h1><ul>
@@ -596,15 +600,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Promise</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +613,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
             
             <div class="clearfix"></div>
