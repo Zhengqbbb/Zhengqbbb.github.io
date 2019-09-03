@@ -172,7 +172,7 @@
 <h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="1-Promise的出现"><a href="#1-Promise的出现" class="headerlink" title="1.Promise的出现"></a>1.Promise的出现</h2><ul>
 <li>下面的代码里benben发起了两个ajax请求：</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">let</span> user;</span><br><span class="line">  <span class="comment">//下面我发起了两个ajax请求</span></span><br><span class="line">  <span class="comment">//fetch all users</span></span><br><span class="line">  $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">    user = data[<span class="number">0</span>].login;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">//fetch the first user's repos</span></span><br><span class="line">  $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`,data =&gt; &#123;</span></span><br><span class="line"><span class="string">    console.log('fetched user repos');</span></span><br><span class="line"><span class="string">    console.log(data)</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">let</span> user;</span><br><span class="line">  <span class="comment">//下面我发起了两个ajax请求</span></span><br><span class="line">  <span class="comment">//fetch all users</span></span><br><span class="line">  $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">    user = data[<span class="number">0</span>].login;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">//fetch the first user's repos</span></span><br><span class="line">  $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`,data =&gt; &#123;</span></span><br><span class="line"><span class="string">    console.log('fetched user repos');</span></span><br><span class="line"><span class="string">    console.log(data)</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>从上面的代码内可以明显看出我对github所有用户发了请求，再对第一位用户的信息发了请求<br><br>我一共运行了两次返回了不一样的结果：<br><br>1.<br><br>fetched user repos<br><br>[{…}]<br><br>fetch all users<br><br>2.<br><br>fetch all users<br><br>fetched user repos<br><br>[{…}]</p>
 </li>
@@ -183,7 +183,7 @@
 <li><p>为了保证先发生第一个ajax请求再执行第二个ajax请求，不难想象我们会把第二个ajax请求写在第一个ajax请求之中：</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> user;</span><br><span class="line">    $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">      user = data[<span class="number">0</span>].login;</span><br><span class="line">      $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`, data =&gt; &#123;</span></span><br><span class="line"><span class="string">      console.log('fetched user repos');</span></span><br><span class="line"><span class="string">      console.log(data)</span></span><br><span class="line"><span class="string">      &#125;)</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> user;</span><br><span class="line">    $.<span class="keyword">get</span>('http://api.github.com/users', data =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'fetch all users'</span>);</span><br><span class="line">      user = data[<span class="number">0</span>].login;</span><br><span class="line">      $.<span class="keyword">get</span>(`https://api.github.com/users/$&#123;user&#125;/repos<span class="string">`, data =&gt; &#123;</span></span><br><span class="line"><span class="string">      console.log('fetched user repos');</span></span><br><span class="line"><span class="string">      console.log(data)</span></span><br><span class="line"><span class="string">      &#125;)</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>返回结果： <br><br>fetch all users<br><br>fetched user repos<br><br> (30) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]<br></li>
 <li>此时确实可以达到我们的预期，而且user也成功返回了第一个用户</li>
@@ -195,21 +195,21 @@
 <li>打个比方我们现在点了一个饿了么外卖，下单后会给你一个订单号，这就是饿了么给了我们的一个承诺，如果商家接单，这承诺就有效成功，否则就是商家拒绝，这个承诺无效，你可以根据这一反馈做出处理。</li>
 <li>接下来我们用axios来实际操作一下Promise：</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">  usersPromise.then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">  usersPromise.then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>上面的then方法类似于事件监听，监听当他成功发起请求会执行什么操作，我们想让返回请求后打印出来：<br><br>{data: Array(30), status: 200, statusText: “OK”, headers: {…}, config: {…}, …}</p>
 </li>
 <li><p>接下来我们想返回第一个用户的数据请求：<br></p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">   usersPromise</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">    <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">  &#125;)<span class="comment">//因为上面返回的也是一个promise实例所以我们可以链式编程打印出来</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">   usersPromise</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">    <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">  &#125;)<span class="comment">//因为上面返回的也是一个promise实例所以我们可以链式编程打印出来</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>返回结果：(30) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}</p>
 </li>
 <li><p>这样我们就可以知道当他第一个请求成功做什么，第二个请求成功后做什么。最后我们再用catch方法监听错误的发生：</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">   usersPromise</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">    <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> usersPromise = axios.get(<span class="string">'http://api.github.com/users'</span>);</span><br><span class="line">  </span><br><span class="line">   usersPromise</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span>&#123;</span><br><span class="line">    username = reponse.data[<span class="number">0</span>].login;</span><br><span class="line">    <span class="keyword">return</span> axios.get(<span class="string">`https://api.github.com/users/<span class="subst">$&#123;username&#125;</span>/repos`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">reponse</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reponse.data);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><p>这次我们对Promise有了简单的了解，可以把他理解为对异步编程的一个反馈一种承诺，通常在调用json数据了ajax请求当中</p>
 <hr>
 <p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
@@ -468,6 +468,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">增加图片</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -484,23 +492,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">增加图片</a>
+                <a href="javascript:void(0)" class="js-tag color5">ElementUI</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,6 +516,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Promise</a>
               </li>
              
@@ -524,15 +536,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Vue.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
               </li>
              
               <li class="article-tag-list-item">
