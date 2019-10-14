@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>16.实习篇-秒杀商品活动的前端优化 2️⃣ | Qbenben</title>
+  <title>17.实习篇-秒杀商品活动的前端优化 2️⃣ | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
 <meta name="keywords" content="Vue,实习,H5活动页">
 <meta property="og:type" content="article">
-<meta property="og:title" content="16.实习篇-秒杀商品活动的前端优化 2️⃣">
+<meta property="og:title" content="17.实习篇-秒杀商品活动的前端优化 2️⃣">
 <meta property="og:url" content="http://qbenben.com/2019/10/14/16.实习篇-秒杀商品活动的前端优化/index.html">
 <meta property="og:site_name" content="Qbenben">
 <meta property="og:description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
@@ -20,9 +20,9 @@
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%801.png">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%802.png">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%803.png">
-<meta property="og:updated_time" content="2019-10-14T12:18:23.898Z">
+<meta property="og:updated_time" content="2019-10-14T12:21:32.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="16.实习篇-秒杀商品活动的前端优化 2️⃣">
+<meta name="twitter:title" content="17.实习篇-秒杀商品活动的前端优化 2️⃣">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
 <meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%804.jpg">
   
@@ -155,7 +155,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      16.实习篇-秒杀商品活动的前端优化 2️⃣
+      17.实习篇-秒杀商品活动的前端优化 2️⃣
     </h1>
   
 
@@ -534,11 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
+                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
+                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
              
               <li class="article-tag-list-item">
