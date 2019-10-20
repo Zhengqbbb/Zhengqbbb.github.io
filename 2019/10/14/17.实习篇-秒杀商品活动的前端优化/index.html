@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%801.png">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%802.png">
 <meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%803.png">
-<meta property="og:updated_time" content="2019-10-16T15:55:17.720Z">
+<meta property="og:updated_time" content="2019-10-20T15:57:38.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17.实习篇-秒杀商品活动的前端优化 2️⃣">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
@@ -172,13 +172,16 @@
 
 <p>这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也是用generator函数发起axios请求，在请求了一天的商品数据后才发起第二天的商品数据，假如像国庆或者是双十一这样的活动，秒杀商品数据量大每天都有并且持续的天数长，比如这次国庆活动持续了13天，假如用户进入页面后请求13组数据，显示他会等待个2s以上。</p>
 <a id="more"></a>
-<h1 id="秒杀商品活动的前端改造"><a href="#秒杀商品活动的前端改造" class="headerlink" title="秒杀商品活动的前端改造"></a>秒杀商品活动的前端改造</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><h2 id="2-预期效果："><a href="#2-预期效果：" class="headerlink" title="2.预期效果："></a>2.预期效果：</h2><table style="width: 64%"><thead><tr><th style="text-align:left">⭐️</th><th style="text-align:left">⭐️</th></tr></thead><tbody style="width: 19%;"><tr><td style="text-align:left;width: 50%;"><img width="100%" src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%804.jpg"></td><td style="text-align:left;width: 50%;"><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%801.png" alt style="width: 100%;
+<h1 id="秒杀商品活动的前端改造"><a href="#秒杀商品活动的前端改造" class="headerlink" title="秒杀商品活动的前端改造"></a>秒杀商品活动的前端改造</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><ul>
+<li>其实要实现最重要的就是索引值，</li>
+</ul>
+<h2 id="2-预期效果："><a href="#2-预期效果：" class="headerlink" title="2.预期效果："></a>2.预期效果：</h2><table style="width: 64%"><thead><tr><th style="text-align:left">⭐️</th><th style="text-align:left">⭐️</th></tr></thead><tbody style="width: 19%;"><tr><td style="text-align:left;width: 50%;"><img width="100%" src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%804.jpg"></td><td style="text-align:left;width: 50%;"><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%801.png" alt style="width: 100%;
 "></td></tr><tr><td style="text-align:left;width: 50%;"><img width="100%" src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%802.png" alt></td><td style="width: 50%;text-align:left;"><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/%E7%A7%92%E6%9D%803.png" alt width="100%"></td></tr></tbody></table>
 
 <p><br><br><b>在这里奔奔就不贴HTML和CSS代码了</b><br><br></p>
 
 
-<h2 id="3-JavaScript实现："><a href="#3-JavaScript实现：" class="headerlink" title="3.JavaScript实现："></a>3.JavaScript实现：</h2><h3 id="1）实现的粗略步骤："><a href="#1）实现的粗略步骤：" class="headerlink" title="1）实现的粗略步骤："></a>1）实现的粗略步骤：</h3><h3 id="2）秒杀设计思想铺垫"><a href="#2）秒杀设计思想铺垫" class="headerlink" title="2）秒杀设计思想铺垫:"></a>2）秒杀设计思想铺垫:</h3><h3 id="3）详细代码分析："><a href="#3）详细代码分析：" class="headerlink" title="3）详细代码分析："></a>3）详细代码分析：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-JavaScript实现："><a href="#3-JavaScript实现：" class="headerlink" title="3.JavaScript实现："></a>3.JavaScript实现：</h2><h3 id="1）之请求当天的："><a href="#1）之请求当天的：" class="headerlink" title="1）之请求当天的："></a>1）之请求当天的：</h3><h3 id="2）"><a href="#2）" class="headerlink" title="2）:"></a>2）:</h3><h3 id="3）："><a href="#3）：" class="headerlink" title="3）："></a>3）：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理"><a href="#4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理" class="headerlink" title="4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:"></a>4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:</h3><h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><hr>
 <p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
 
@@ -327,7 +330,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秒杀商品活动的前端改造"><span class="toc-number">1.</span> <span class="toc-text">秒杀商品活动的前端改造</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-预期效果："><span class="toc-number">1.2.</span> <span class="toc-text">2.预期效果：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JavaScript实现："><span class="toc-number">1.3.</span> <span class="toc-text">3.JavaScript实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）实现的粗略步骤："><span class="toc-number">1.3.1.</span> <span class="toc-text">1）实现的粗略步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）秒杀设计思想铺垫"><span class="toc-number">1.3.2.</span> <span class="toc-text">2）秒杀设计思想铺垫:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3）详细代码分析："><span class="toc-number">1.3.3.</span> <span class="toc-text">3）详细代码分析：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理"><span class="toc-number">1.3.4.</span> <span class="toc-text">4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.4.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.5.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秒杀商品活动的前端改造"><span class="toc-number">1.</span> <span class="toc-text">秒杀商品活动的前端改造</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-预期效果："><span class="toc-number">1.2.</span> <span class="toc-text">2.预期效果：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JavaScript实现："><span class="toc-number">1.3.</span> <span class="toc-text">3.JavaScript实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）之请求当天的："><span class="toc-number">1.3.1.</span> <span class="toc-text">1）之请求当天的：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）"><span class="toc-number">1.3.2.</span> <span class="toc-text">2）:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3）："><span class="toc-number">1.3.3.</span> <span class="toc-text">3）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理"><span class="toc-number">1.3.4.</span> <span class="toc-text">4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.4.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.5.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -471,10 +474,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端学习</a>
               </li>
              
@@ -484,6 +483,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">冒泡排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,15 +506,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,6 +519,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Vue.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
               </li>
             
             <div class="clearfix"></div>
