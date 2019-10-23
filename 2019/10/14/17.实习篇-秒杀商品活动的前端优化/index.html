@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Qbenben">
 <meta property="og:description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-23T15:56:48.754Z">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/1111.jpg">
+<meta property="og:updated_time" content="2019-10-23T16:17:36.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17.实习篇-秒杀商品活动的前端优化 2️⃣">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
+<meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/1111.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -170,6 +172,10 @@
 <h1 id="秒杀商品活动的前端改造"><a href="#秒杀商品活动的前端改造" class="headerlink" title="秒杀商品活动的前端改造"></a>秒杀商品活动的前端改造</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><ul>
 <li>其实要实现最重要的就是进入页面处于时间表当中的哪一天获取其中的索引值，一天有几场秒杀场次，显示的场次场数之间做运算。还有一个就是在红皮书当中学到的对于前面几天的商品数据流没必要获取，为了更方便对后面执行代码顺序不混乱，我采用了<code>注入null</code>空对象指针，防止数组崩塌或者数组顺序混淆。</li>
 </ul>
+<table style="width: 22%;"><thead><th style="text-align:left">⭐️</th></thead><tbody style="width: 19%;"><tr><td style="text-align:left;width: 50%;"><img width="100%" src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/19-9-18/1111.jpg"></td></tr></tbody></table>
+
+
+
 <p><br><br><b>在这里奔奔就不贴HTML和CSS代码了</b><br><br></p>
 
 
@@ -192,8 +198,19 @@
 <li>反之则要显示当天剩余的时间</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (day === <span class="number">0</span> &amp;&amp; hour === <span class="number">0</span> &amp;&amp; min === <span class="number">0</span> &amp;&amp; second === <span class="number">0</span>) &#123; <span class="comment">//时间结束 </span></span><br><span class="line">  clearInterval(_this.interval);</span><br><span class="line">  <span class="keyword">if</span> (_this.itemIsStart == <span class="number">0</span>) &#123; <span class="comment">//如果当前状态是未开始，则直接切换为当前的秒杀时间段</span></span><br><span class="line">    _this.changesecKill(_this.secKilIndex);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_this.itemIsStart == <span class="number">1</span>) &#123; <span class="comment">//如果当前状态是开始</span></span><br><span class="line">    <span class="keyword">if</span> (_this.secKilIndex &lt;= <span class="number">13</span>) &#123;</span><br><span class="line">      <span class="comment">//只有当天数变化时才发起请求,如果一天只有一场此判断条件需要更改</span></span><br><span class="line">      <span class="keyword">if</span> (_this.secKilIndex % _this.oneDaysecKil === (_this.oneDaysecKil - <span class="number">1</span>) &amp;&amp;</span><br><span class="line">        _this.secKilIndex !== <span class="number">0</span>) &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          _this.secKillloadingData = <span class="literal">true</span>;</span><br><span class="line">          _this.actionFetch.next()</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        _this.changesecKill(_this.secKilIndex + <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2）"><a href="#2）" class="headerlink" title="2）:"></a>2）:</h3><h3 id="3）："><a href="#3）：" class="headerlink" title="3）："></a>3）：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理"><a href="#4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理" class="headerlink" title="4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:"></a>4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:</h3><h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><hr>
+<ul>
+<li>在countDown函数当中，假如时分秒都为0则意味则是当前秒杀的结束</li>
+<li>假如状态是未开始的话则直接调用切换函数，将索引值传入</li>
+<li>假如是已经开始了，则需要判断当前秒杀索引与一天场次取余等于场次-1则说明进入了全新的一天，并且不是第一天。发起请求</li>
+<li>否则说明还是当天嘛，直接切换</li>
+<li>这里需要说明直接在函数中调用generator函数的next异步方法，要避免写成同步。</li>
+</ul>
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
+<li>其实到后面处理只显示当天和明天的代码逻辑都是差不多的，奔奔就不一一阐述了。</li>
+<li>正如组长跟我说的，其实我真的是改写，而不是重写功能。从我注入null就能看出。</li>
+<li>其实奔奔是不想动别人写的代码，因为我也不知道前人会不会在其他地方也用到同样的方法和逻辑，防止出现bug</li>
+</ul>
+<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><hr>
 <p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
 
       
@@ -341,7 +358,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秒杀商品活动的前端改造"><span class="toc-number">1.</span> <span class="toc-text">秒杀商品活动的前端改造</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JavaScript实现："><span class="toc-number">1.2.</span> <span class="toc-text">3.JavaScript实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）只请求当天的，切换天数再请求："><span class="toc-number">1.2.1.</span> <span class="toc-text">1）只请求当天的，切换天数再请求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）"><span class="toc-number">1.2.2.</span> <span class="toc-text">2）:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3）："><span class="toc-number">1.2.3.</span> <span class="toc-text">3）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理"><span class="toc-number">1.2.4.</span> <span class="toc-text">4）对之前获取秒杀商品列表代码出现的回调嵌套地狱进行处理:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.3.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.4.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秒杀商品活动的前端改造"><span class="toc-number">1.</span> <span class="toc-text">秒杀商品活动的前端改造</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JavaScript实现："><span class="toc-number">1.2.</span> <span class="toc-text">3.JavaScript实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）只请求当天的，切换天数再请求："><span class="toc-number">1.2.1.</span> <span class="toc-text">1）只请求当天的，切换天数再请求：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.3.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.4.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -481,14 +498,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端学习</a>
               </li>
              
@@ -498,6 +507,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">冒泡排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,7 +530,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,14 +551,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Vue.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
             
             <div class="clearfix"></div>
