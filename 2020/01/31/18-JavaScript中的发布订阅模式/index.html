@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>Tag: 冒泡排序 | Qbenben</title>
+  <title>18-JavaScript中的观察者模式 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://qbenben.com/tags/冒泡排序/index.html">
+  <meta name="description" content="body,li,code{font-size:16px;}  呼，现在终于能继续完成我的代码学习了。今天我们就记录一下观察者模式的学习，也是简易版的发布订阅模式">
+<meta name="keywords" content="JavaScript,发布订阅模式,观察者模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="18-JavaScript中的观察者模式">
+<meta property="og:url" content="http://qbenben.com/2020/01/31/18-JavaScript中的发布订阅模式/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="body,li,code{font-size:16px;}  呼，现在终于能继续完成我的代码学习了。今天我们就记录一下观察者模式的学习，也是简易版的发布订阅模式">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-31T03:52:31.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="18-JavaScript中的观察者模式">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  呼，现在终于能继续完成我的代码学习了。今天我们就记录一下观察者模式的学习，也是简易版的发布订阅模式">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,36 +143,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-18-JavaScript中的发布订阅模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/18/2.前端常见算法/" class="archive-article-date">
-  	<time datetime="2019-05-17T20:31:39.022Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/18/2.前端常见算法/">2.前端学习——冒泡排序和快速排序学习</a>
+    <h1 class="article-title" itemprop="name">
+      18-JavaScript中的观察者模式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/01/31/18-JavaScript中的发布订阅模式/" class="archive-article-date">
+  	<time datetime="2020-01-31T01:14:45.069Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>呼，现在终于能继续完成我的代码学习了。今天我们就记录一下观察者模式的学习，也是简易版的发布订阅模式</p>
+<a id="more"></a>
+<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><ul>
+<li>首先我们来介绍一下概念：观察者模式是定义在对象之间一种一对多的依赖关系，以便一个对象的状态发生改变的时候，所有依赖于它的对象都能得到通知并自动刷新。</li>
+<li><p>发布订阅模式虽然概念和观察者模式非常类似。但是其中最大的区别在于：<code>在发布-订阅模式，消息发送方，叫做发布者，这些消息不会直接发送给特定的订阅者，而是需要一个第三方组件，叫做信息中介，它将发布者和订阅者串联起来，换句话说发布-订阅模式处理不同系统组件信息交流，即使这些组件不知道对方的存在。</code>下一次我们就结合Vue再记录一下发布订阅模式的学习。</p>
+</li>
+<li><p>这里我们举一个例子方便我们知道观察者模式的大体情景。比如说我们在淘宝买衣服，顾客A，顾客B都订阅一家商家，一旦商家有上新，就会通知顾客A和顾客B。</p>
+</li>
+</ul>
+<h2 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pubsub = &#123;&#125;; <span class="comment">// 定义发布者</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">q</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> list = [], <span class="comment">//回调函数存放的数组，也就是记录有多少人订阅了我们东西</span></span><br><span class="line">    subUid = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @description: 发布消息，遍历订阅者</span></span><br><span class="line"><span class="comment">   * @param &#123;shopName&#125; 商家</span></span><br><span class="line"><span class="comment">   * @param &#123;product&#125; 商品</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  q.publish = <span class="function"><span class="keyword">function</span>(<span class="params">shopName, product</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//判断没人订阅的话返回false</span></span><br><span class="line">    <span class="keyword">if</span> (!list[shopName]) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> subscribers = list[shopName],</span><br><span class="line">        len = subscribers ? subscribers.length : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">while</span> (len--) &#123;</span><br><span class="line">        <span class="comment">//将商品注入到订阅者</span></span><br><span class="line">        subscribers[len].func(shopName, product);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @description: 订阅方法，由订阅者来执行</span></span><br><span class="line"><span class="comment">   * @param &#123;shopName&#125; 商家</span></span><br><span class="line"><span class="comment">   * @param &#123;func&#125; 回调函数</span></span><br><span class="line"><span class="comment">   * @return: </span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  q.subscribe = <span class="function"><span class="keyword">function</span>(<span class="params">shopName, func</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果之前没有订阅过</span></span><br><span class="line">    <span class="keyword">if</span> (!list[shopName]) &#123;</span><br><span class="line">      list[shopName] = [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// token相当于订阅者的id，这样的话如果退订，我们就可以针对它来知道是谁退订了。</span></span><br><span class="line">    <span class="keyword">var</span> token = (++subUid).toString();</span><br><span class="line">    <span class="comment">// 每订阅一个，就把它存入到我们的数组中去</span></span><br><span class="line">    list[shopName].push(&#123;</span><br><span class="line">      token: token,</span><br><span class="line">      func: func</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> token;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @description: 退订方法</span></span><br><span class="line"><span class="comment">   * @param &#123;token&#125; 订阅者的id</span></span><br><span class="line"><span class="comment">   * @return: </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  q.unsubscribe = <span class="function"><span class="keyword">function</span>(<span class="params">token</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> m <span class="keyword">in</span> list) &#123;</span><br><span class="line">      <span class="keyword">if</span> (list[m]) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, j = list[m].length; i &lt; j; i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (list[m][i].token === token) &#123;</span><br><span class="line">            list[m].splice(i, <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span> token;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;(pubsub))</span><br><span class="line"></span><br><span class="line"><span class="comment">//将订阅赋值给一个变量，以便退订</span></span><br><span class="line"><span class="keyword">var</span> girlA = pubsub.subscribe(<span class="string">'qbenben店'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">type, product</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'girlA订阅的'</span>+type + <span class="string">": 内容内容为："</span> + product);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> girlB = pubsub.subscribe(<span class="string">'qbenben店'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">type, product</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'girlB订阅的'</span>+type + <span class="string">": 内容内容为："</span> + product);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> girlC = pubsub.subscribe(<span class="string">'qbenben店'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">type, product</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'girlC订阅的'</span>+type + <span class="string">": 内容内容为："</span> + product);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//发布通知</span></span><br><span class="line">pubsub.publish(<span class="string">'qbenben店'</span>, <span class="string">'上新书籍'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">输出：</span></span><br><span class="line"><span class="comment">girlC订阅的qbenben店: 内容内容为：上新书籍</span></span><br><span class="line"><span class="comment">girlB订阅的qbenben店: 内容内容为：上新书籍</span></span><br><span class="line"><span class="comment">girlA订阅的qbenben店: 内容内容为：上新书籍</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//girlA测试退订</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  pubsub.unsubscribe(girlA);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//再发布一次</span></span><br><span class="line">pubsub.publish(<span class="string">'qbenben店'</span>, <span class="string">'上新书籍'</span>);</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">输出：</span></span><br><span class="line"><span class="comment">girlC订阅的qbenben店: 内容内容为：上新书籍</span></span><br><span class="line"><span class="comment">girlB订阅的qbenben店: 内容内容为：上新书籍</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
+<li><p>优点：当我们需要维护相关对象的一致性的时候，使用观察者模式，，就可以避免对象之间的紧密耦合。例如，一个对象可以通知另外一个对象，而不需要知道这个对象的信息。</p>
+</li>
+<li><p>缺点：在发布/订阅模式中，如果我们需要将发布者同订阅者上解耦，将会在一些情况下，导致很难确保我们应用中的特定部分按照我们预期的那样正常工作。也就是说它的优点也可能是它的缺点</p>
+</li>
+</ul>
+<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<li>掘金：<a href="https://juejin.im/post/5d32f164f265da1bc64bfebf" target="_blank" rel="noopener">https://juejin.im/post/5d32f164f265da1bc64bfebf</a></li>
+</ul>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -181,33 +229,129 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">发布订阅模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">冒泡排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">观察者模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2020/01/31/18-JavaScript中的发布订阅模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/10/14/17.实习篇-秒杀商品活动的前端优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">17.实习篇-秒杀商品活动的前端优化 2️⃣</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#观察者模式"><span class="toc-number">1.</span> <span class="toc-text">观察者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-代码实现"><span class="toc-number">1.2.</span> <span class="toc-text">2.代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.3.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.4.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -231,9 +375,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
