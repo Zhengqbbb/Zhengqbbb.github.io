@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Qbenben">
 <meta property="og:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-19T15:49:57.374Z">
+<meta property="og:updated_time" content="2020-02-20T15:55:01.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="19-Vue的数据双向绑定原理">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
@@ -180,6 +180,10 @@
 <li>此时我们想要在执行console.log的同时直接给书名加上一个书名号，那么要怎么处理呢？或者说通过什么什么来监听Book的属性值呢，这个时候就可以使用Object.defineProperty()</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">''</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Book, <span class="string">'name'</span>,&#123;</span><br><span class="line">  <span class="keyword">set</span>: function(value)&#123;</span><br><span class="line">    name = value;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'你设置了一个书名'</span> + value )</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">get</span>: function()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`《<span class="subst">$&#123;name&#125;</span>》`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Book.name = <span class="string">'Qbenben的书籍'</span>;  <span class="comment">// 你设置了一个书名Qbenben的书籍</span></span><br><span class="line"><span class="built_in">console</span>.log(Book.name);  <span class="comment">// 《Qbenben的书籍》</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-思路分析"><a href="#3-思路分析" class="headerlink" title="3.思路分析"></a>3.思路分析</h2><ul>
+<li>实现mvvm主要包括两个方面，数据变化更新视图，视图变换更新数据：<b>关键点在于data如何更新view</b>，因为view更新data其实可以通过事件监听即可，比如input标签监听’input’事件就可以实现了。所以我们来分析一下，当数据改变，如何更新视图。</li>
+<li>数据更新视图。其重点就是如何知道数据变了，就是通过Object.definePropery()对属性设置一个set函数，当数据改变就来触发这个函数，所以我们只要将一些需要更新的方法放在里面就可以实现data更新view了。</li>
+</ul>
 <h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
 <li>优点：</li>
 </ul>
@@ -334,7 +338,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue数据双向绑定原理"><span class="toc-number">1.</span> <span class="toc-text">Vue数据双向绑定原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Object-defineProperty"><span class="toc-number">1.2.</span> <span class="toc-text">2.Object.defineProperty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.3.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.4.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue数据双向绑定原理"><span class="toc-number">1.</span> <span class="toc-text">Vue数据双向绑定原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Object-defineProperty"><span class="toc-number">1.2.</span> <span class="toc-text">2.Object.defineProperty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-思路分析"><span class="toc-number">1.3.</span> <span class="toc-text">3.思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.4.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.5.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -447,18 +451,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ElementUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -475,11 +467,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">发布订阅模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">观察者模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">ElementUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">发布订阅模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,7 +495,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
+                <a href="javascript:void(0)" class="js-tag color1">观察者模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,10 +519,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Promise</a>
               </li>
              
@@ -523,15 +527,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
               </li>
              
               <li class="article-tag-list-item">
