@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Qbenben">
 <meta property="og:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-20T15:55:01.981Z">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png">
+<meta property="og:updated_time" content="2020-02-21T11:20:10.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="19-Vue的数据双向绑定原理">
 <meta name="twitter:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
+<meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -184,10 +186,19 @@
 <li>实现mvvm主要包括两个方面，数据变化更新视图，视图变换更新数据：<b>关键点在于data如何更新view</b>，因为view更新data其实可以通过事件监听即可，比如input标签监听’input’事件就可以实现了。所以我们来分析一下，当数据改变，如何更新视图。</li>
 <li>数据更新视图。其重点就是如何知道数据变了，就是通过Object.definePropery()对属性设置一个set函数，当数据改变就来触发这个函数，所以我们只要将一些需要更新的方法放在里面就可以实现data更新view了。</li>
 </ul>
-<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><ul>
-<li>优点：</li>
+<h2 id="4-实现过程"><a href="#4-实现过程" class="headerlink" title="4.实现过程"></a>4.实现过程</h2><ul>
+<li>我们要实现数据的双向绑定，首先要对数据进行劫持，所以我们需要设置一个一个监听器Observer，用来监听所有属性.如果属性发生了变化，就需要告诉订阅者Watcher是否需要更新。因为订阅者是多个，所以我们需要有一个消息订阅器Dep来专门收集这些订阅者，然后在监听器Oberser和订阅者Watcher之间进行统一管理。接着，我们还需要一个指令解析器Compile，对每个节点元素进行扫描和解析，将相关指令对应初始化一个订阅者Watcher，并替换模板数据或者绑定相应的函数，此时订阅者Wtacher接收到相应属性的变化，就会执行对应的更新函数，从而更新视图。因此接下来我们需要执行以下的三个步骤，就可以实现我们的数据双向绑定。</li>
 </ul>
-<h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<p>1.实现一个监听器Observer，用来劫持并监听所有属性，如果有变动，就通知订阅者<br>2.实现一个订阅者Watcher，用来收到属性的变化通知并执行相应的函数，从而更新视图。<br>3.实现一个解析器Compile，可以扫描并解析每个节点相关的指令，并根据初始化的模板数据以及初始化相应的订阅器。</p>
+
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png" alt></p>
+<!-- ##  5.实现一个Oberser监听器
+* Oberser是一个数据监听器，其实核心的方法就是前文所说的Object.defineProperty()。如果要对所有属性进行监听的话，那么可以通过递归方法遍历所有的属性值，并对其进行Object.defineProperty()处理。如下代码：
+
+```JavaScript
+
+``` -->
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
 <li>掘金：<a href="https://www.cnblogs.com/canfoo/p/6891868.html" target="_blank" rel="noopener">https://www.cnblogs.com/canfoo/p/6891868.html</a></li>
 </ul>
 <hr>
@@ -338,7 +349,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue数据双向绑定原理"><span class="toc-number">1.</span> <span class="toc-text">Vue数据双向绑定原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Object-defineProperty"><span class="toc-number">1.2.</span> <span class="toc-text">2.Object.defineProperty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-思路分析"><span class="toc-number">1.3.</span> <span class="toc-text">3.思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.4.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.5.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue数据双向绑定原理"><span class="toc-number">1.</span> <span class="toc-text">Vue数据双向绑定原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Object-defineProperty"><span class="toc-number">1.2.</span> <span class="toc-text">2.Object.defineProperty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-思路分析"><span class="toc-number">1.3.</span> <span class="toc-text">3.思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-实现过程"><span class="toc-number">1.4.</span> <span class="toc-text">4.实现过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.5.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.6.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -483,10 +494,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">发布订阅模式</a>
               </li>
              
@@ -496,6 +503,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">观察者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,7 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
+                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,7 +546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
+                <a href="javascript:void(0)" class="js-tag color2">原型和原型链</a>
               </li>
              
               <li class="article-tag-list-item">
