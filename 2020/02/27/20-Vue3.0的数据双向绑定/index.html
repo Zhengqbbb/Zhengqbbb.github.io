@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://qbenben.com">
-  <title>Tag: 快速排序 | Qbenben</title>
+  <title>19-Vue的数据双向绑定原理 | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="���ѧϰ">
-<meta name="keywords" content="��ˣ����ѧϰ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qbenben">
-<meta property="og:url" content="http://qbenben.com/tags/快速排序/index.html">
+  <meta name="description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
+<meta name="keywords" content="Vue,发布订阅模式,双向数据绑定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="19-Vue的数据双向绑定原理">
+<meta property="og:url" content="http://qbenben.com/2020/02/27/20-Vue3.0的数据双向绑定/index.html">
 <meta property="og:site_name" content="Qbenben">
-<meta property="og:description" content="���ѧϰ">
+<meta property="og:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png">
+<meta property="og:updated_time" content="2020-02-21T11:20:10.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qbenben">
-<meta name="twitter:description" content="���ѧϰ">
+<meta name="twitter:title" content="19-Vue的数据双向绑定原理">
+<meta name="twitter:description" content="body,li,code{font-size:16px;}  现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。">
+<meta name="twitter:image" content="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png">
   
     <link rel="alternative" href="/atom.xml" title="Qbenben" type="application/atom+xml">
   
@@ -142,72 +145,230 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20-Vue3.0的数据双向绑定" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/18/2.前端常见算法/" class="archive-article-date">
-  	<time datetime="2019-05-17T20:31:39.022Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/18/2.前端常见算法/">2.前端学习——冒泡排序和快速排序学习</a>
+    <h1 class="article-title" itemprop="name">
+      19-Vue的数据双向绑定原理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/27/20-Vue3.0的数据双向绑定/" class="archive-article-date">
+  	<time datetime="2020-02-27T15:55:45.702Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>body,li,code{font-size:16px;}</style>
+
+<p>现在开始我们进入Vue的数据双向绑定原理的学习，虽然在Vue3.0将以下的原理取代，可是我们可以学习其中很重要的发布者-订阅者模式。下节课我们可以学习3.0取代后的原理实现。</p>
+<a id="more"></a>
+<h1 id="Vue数据双向绑定原理"><a href="#Vue数据双向绑定原理" class="headerlink" title="Vue数据双向绑定原理"></a>Vue数据双向绑定原理</h1><h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><ul>
+<li>首先我们来介绍一下概念：Vue的双向数据绑定是通过发布者-订阅者模式来实现，我们可以再控制台中输出数据来看看。</li>
+<li>我们其实可以看见我们在Vue定义的属性都会get和set方法。那为什么会多出这两个方法呢？是因为Vue通过Object.defineProperty() 来实现数据劫持</li>
+</ul>
+<h2 id="2-Object-defineProperty"><a href="#2-Object-defineProperty" class="headerlink" title="2.Object.defineProperty()"></a>2.Object.defineProperty()</h2><ul>
+<li>Object.defineProperty()可以控制一个对象属性和一些特有的操作，比如读写权、是否可以枚举，这里我们主要研究它的两个描述属性get和set。</li>
+<li>这里我们先定义一个对象的属性数据：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = &#123;</span><br><span class="line">  name: <span class="string">'Qbenben的书籍'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Book.name)<span class="comment">//Qbenben的书籍</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时我们想要在执行console.log的同时直接给书名加上一个书名号，那么要怎么处理呢？或者说通过什么什么来监听Book的属性值呢，这个时候就可以使用Object.defineProperty()</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">''</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Book, <span class="string">'name'</span>,&#123;</span><br><span class="line">  <span class="keyword">set</span>: function(value)&#123;</span><br><span class="line">    name = value;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'你设置了一个书名'</span> + value )</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">get</span>: function()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`《<span class="subst">$&#123;name&#125;</span>》`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Book.name = <span class="string">'Qbenben的书籍'</span>;  <span class="comment">// 你设置了一个书名Qbenben的书籍</span></span><br><span class="line"><span class="built_in">console</span>.log(Book.name);  <span class="comment">// 《Qbenben的书籍》</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-思路分析"><a href="#3-思路分析" class="headerlink" title="3.思路分析"></a>3.思路分析</h2><ul>
+<li>实现mvvm主要包括两个方面，数据变化更新视图，视图变换更新数据：<b>关键点在于data如何更新view</b>，因为view更新data其实可以通过事件监听即可，比如input标签监听’input’事件就可以实现了。所以我们来分析一下，当数据改变，如何更新视图。</li>
+<li>数据更新视图。其重点就是如何知道数据变了，就是通过Object.definePropery()对属性设置一个set函数，当数据改变就来触发这个函数，所以我们只要将一些需要更新的方法放在里面就可以实现data更新view了。</li>
+</ul>
+<h2 id="4-实现过程"><a href="#4-实现过程" class="headerlink" title="4.实现过程"></a>4.实现过程</h2><ul>
+<li>我们要实现数据的双向绑定，首先要对数据进行劫持，所以我们需要设置一个一个监听器Observer，用来监听所有属性.如果属性发生了变化，就需要告诉订阅者Watcher是否需要更新。因为订阅者是多个，所以我们需要有一个消息订阅器Dep来专门收集这些订阅者，然后在监听器Oberser和订阅者Watcher之间进行统一管理。接着，我们还需要一个指令解析器Compile，对每个节点元素进行扫描和解析，将相关指令对应初始化一个订阅者Watcher，并替换模板数据或者绑定相应的函数，此时订阅者Wtacher接收到相应属性的变化，就会执行对应的更新函数，从而更新视图。因此接下来我们需要执行以下的三个步骤，就可以实现我们的数据双向绑定。</li>
+</ul>
+<p>1.实现一个监听器Observer，用来劫持并监听所有属性，如果有变动，就通知订阅者<br>2.实现一个订阅者Watcher，用来收到属性的变化通知并执行相应的函数，从而更新视图。<br>3.实现一个解析器Compile，可以扫描并解析每个节点相关的指令，并根据初始化的模板数据以及初始化相应的订阅器。</p>
+
+<p><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/blog/%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A2.png" alt></p>
+<!-- ##  5.实现一个Oberser监听器
+* Oberser是一个数据监听器，其实核心的方法就是前文所说的Object.defineProperty()。如果要对所有属性进行监听的话，那么可以通过递归方法遍历所有的属性值，并对其进行Object.defineProperty()处理。如下代码：
+
+```JavaScript
+
+``` -->
+<h2 id="总结本篇："><a href="#总结本篇：" class="headerlink" title="总结本篇："></a>总结本篇：</h2><h2 id="学习途径、引用："><a href="#学习途径、引用：" class="headerlink" title="学习途径、引用："></a>学习途径、引用：</h2><ul>
+<li>掘金：<a href="https://www.cnblogs.com/canfoo/p/6891868.html" target="_blank" rel="noopener">https://www.cnblogs.com/canfoo/p/6891868.html</a></li>
+</ul>
+<hr>
+<p>Qbenben：This is a blog for record my study.Thanks for watching.</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">发布订阅模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">冒泡排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">双向数据绑定</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://qbenben.com/2020/02/27/20-Vue3.0的数据双向绑定/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/02/19/19-Vue的数据双向绑定原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">19-Vue的数据双向绑定原理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue数据双向绑定原理"><span class="toc-number">1.</span> <span class="toc-text">Vue数据双向绑定原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言："><span class="toc-number">1.1.</span> <span class="toc-text">1.前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Object-defineProperty"><span class="toc-number">1.2.</span> <span class="toc-text">2.Object.defineProperty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-思路分析"><span class="toc-number">1.3.</span> <span class="toc-text">3.思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-实现过程"><span class="toc-number">1.4.</span> <span class="toc-text">4.实现过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结本篇："><span class="toc-number">1.5.</span> <span class="toc-text">总结本篇：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习途径、引用："><span class="toc-number">1.6.</span> <span class="toc-text">学习途径、引用：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -231,9 +392,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
