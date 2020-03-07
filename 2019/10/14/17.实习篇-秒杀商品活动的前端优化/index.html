@@ -9,7 +9,7 @@
   <title>17.实习篇-秒杀商品活动的前端优化 2️⃣ | Qbenben</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="body,li,code{font-size:16px;}  这两天大佬要我把上期我们讲到的秒杀商品前端实现进行改造，分别进行了三次改造，只显示当天的秒杀商品，只显示当天和次日的秒杀商品，只请求当天和次日秒杀商品数据实现优化。其实在他提出来的时候我就已经知道他要我进行优化了同时在做的时候已经为后面的优化进行了思考留铺垫，因为在以往的代码里由于秒杀商品需要极度依赖顺序(队列)所以在请求的时候，我们也">
-<meta name="keywords" content="Vue,实习,H5活动页">
+<meta name="keywords" content="H5活动页,Vue,实习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="17.实习篇-秒杀商品活动的前端优化 2️⃣">
 <meta property="og:url" content="http://qbenben.com/2019/10/14/17.实习篇-秒杀商品活动的前端优化/index.html">
@@ -251,15 +251,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">H5活动页</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">实习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">H5活动页</a>
         		</li>
       		
 		</ul>
@@ -496,11 +496,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ElementUI</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,7 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">H5活动页</a>
+                <a href="javascript:void(0)" class="js-tag color5">ElementUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +520,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向数据绑定</a>
+                <a href="javascript:void(0)" class="js-tag color1">观察者模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">观察者模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向数据绑定</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,10 +537,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">冒泡排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随手笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,11 +560,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
+                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">装饰者模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">防抖与节流</a>
               </li>
              
               <li class="article-tag-list-item">
